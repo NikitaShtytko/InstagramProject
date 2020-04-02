@@ -11,6 +11,7 @@ import java.util.List;
 public class Posts{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     private Long id;
 
     //todo Спросить
@@ -25,7 +26,7 @@ public class Posts{
     private String tag;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Users user;
 
     @OneToMany

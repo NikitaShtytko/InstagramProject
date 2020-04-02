@@ -9,22 +9,23 @@ import javax.persistence.*;
 public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_id")
     private Long id;
 
     private String txt;
 
-    @Column(name = "post_id")
+    @Column(name = "post_id", insertable = false, updatable = false)
     private Long postId;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", insertable = false, updatable = false)
     private Posts post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Users user;
 }
 

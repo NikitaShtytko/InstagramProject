@@ -9,12 +9,13 @@ import javax.persistence.*;
 public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "like_id")
     private Long id;
 
-    @Column(name = "post_id")
+    @Column(name = "post_id", insertable = false, updatable = false)
     private Long postId;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id",insertable = false, updatable = false)
     private Posts post;
 }

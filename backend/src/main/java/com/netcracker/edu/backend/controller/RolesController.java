@@ -20,11 +20,7 @@ public class RolesController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Roles> getRolesById(@PathVariable(name = "id") Long id) {
         Optional<Roles> roles = rolesService.getRolesById(id);
-        if (roles.isPresent()) {
-            return ResponseEntity.ok(roles.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return roles.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

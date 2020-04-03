@@ -20,11 +20,7 @@ public class TagsController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Tags> getTagsById(@PathVariable(name = "id") Long id) {
         Optional<Tags> tags = tagsService.getTagsById(id);
-        if (tags.isPresent()) {
-            return ResponseEntity.ok(tags.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return tags.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

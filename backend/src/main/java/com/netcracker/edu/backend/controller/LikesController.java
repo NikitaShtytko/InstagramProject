@@ -22,11 +22,7 @@ public class LikesController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Likes> getLikesById(@PathVariable(name = "id") Long id) {
         Optional<Likes> likes = likesService.getLikesById(id);
-        if (likes.isPresent()) {
-            return ResponseEntity.ok(likes.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return likes.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

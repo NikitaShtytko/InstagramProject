@@ -21,11 +21,7 @@ public class PostsController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Posts> getPostsById(@PathVariable(name = "id") Long id) {
         Optional<Posts> posts = postsService.getPostsById(id);
-        if (posts.isPresent()) {
-            return ResponseEntity.ok(posts.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return posts.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

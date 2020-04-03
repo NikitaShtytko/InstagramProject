@@ -20,15 +20,16 @@ public class UsersController {
         this.usersService = usersService;
     }
 
+    @RequestMapping(value = "/login/{login}", method = RequestMethod.GET)
+    public ResponseEntity<Users> getUserByLogin(@PathVariable(name = "login") String login) {
+        Users users = usersService.findByLogin(login);
+        return ResponseEntity.ok(users);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Users> getUsersById(@PathVariable(name = "id") Long id) {
         Optional<Users> users = usersService.getUsersById(id);
-        if (users.isPresent()) {
-            return ResponseEntity.ok(users.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return users.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

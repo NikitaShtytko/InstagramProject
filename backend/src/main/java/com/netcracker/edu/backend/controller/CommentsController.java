@@ -22,11 +22,7 @@ public class CommentsController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Comments> getCommentsById(@PathVariable(name = "id") Long id) {
         Optional<Comments> comments = commentsService.getCommentsById(id);
-        if (comments.isPresent()) {
-            return ResponseEntity.ok(comments.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return comments.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

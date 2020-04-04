@@ -3,10 +3,7 @@ package com.netcracker.edu.backend.controller;
 import com.netcracker.edu.backend.entity.Role;
 import com.netcracker.edu.backend.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/roles")
@@ -17,18 +14,18 @@ public class RoleController {
     @Autowired
     public RoleController(RoleService roleService){this.roleService = roleService;}
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Role> getRolesById(@PathVariable(name = "id") Long id) {
-        Optional<Role> roles = roleService.getRolesById(id);
-        return roles.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @RequestMapping(value = "", method = RequestMethod.GET)
-//    @GetMapping
-    public Iterable<Role> getAllRoles() {
-        System.out.println("GET DETECTED");
-        return roleService.getAllRoles();
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public ResponseEntity<Role> getRolesById(@PathVariable(name = "id") Long id) {
+//        Optional<Role> roles = roleService.getRolesById(id);
+//        return roles.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+//    }
+//
+//    @RequestMapping(value = "", method = RequestMethod.GET)
+////    @GetMapping
+//    public Iterable<Role> getAllRoles() {
+//        System.out.println("GET DETECTED");
+//        return roleService.getAllRoles();
+//    }
 
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping

@@ -3,8 +3,6 @@ package com.netcracker.edu.backend.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +16,6 @@ public class Tag {
 
     private String txt;
 
-    @ManyToMany(mappedBy = "tags")
-    private List<Post> posts = new ArrayList<>();
+//    @ManyToMany(mappedBy = "tags")
+//    private List<Post> post = new ArrayList<>();
 }

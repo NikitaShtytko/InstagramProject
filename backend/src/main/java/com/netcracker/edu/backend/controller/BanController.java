@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/ban")
+@RequestMapping("/api/bans")
 public class BanController {
 
     private BanService banService;
@@ -36,6 +36,7 @@ public class BanController {
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping
     public Ban saveBans(@RequestBody Ban ban) {
+        System.out.println("POST DETECTED");
         return banService.saveBans(ban);
     }
 

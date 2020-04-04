@@ -3,7 +3,6 @@ package com.netcracker.edu.backend.service.impl;
 import com.netcracker.edu.backend.entity.Role;
 import com.netcracker.edu.backend.repository.RoleRepository;
 import com.netcracker.edu.backend.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,8 +10,12 @@ import java.util.Optional;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
+    final
     RoleRepository roleRepository;
+
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @Override
     public Optional<Role> getRolesById(Long id) {

@@ -32,20 +32,22 @@ public class User {
     private String gender;
 
     @ManyToOne()
-    @JoinColumn(name="role_id", nullable=false, insertable = false, updatable = false)
+    @JoinColumn(name = "role_id", nullable = false, insertable = false, updatable = false)
     private Role role;
 
+    //todo Простестировать работу OneToMany relationship.
     @OneToMany()
     @JoinColumn(name = "ban_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;
 
+
 //    @OneToMany(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "post_id")
-//    private List<Posts> post;
+//    private List<Post> post;
 
 //    @OneToMany
 //    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-//    private List<Comments> comment;
+//    private List<Comment> comment;
 }
 
 

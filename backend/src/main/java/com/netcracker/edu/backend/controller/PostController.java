@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/post")
+@RequestMapping("/api/posts")
 public class PostController {
 
     private PostService postService;
@@ -33,6 +33,7 @@ public class PostController {
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping
     public Post savePosts(@RequestBody Post post) {
+        System.out.println("POST DETECTED");
         return postService.savePosts(post);
     }
 

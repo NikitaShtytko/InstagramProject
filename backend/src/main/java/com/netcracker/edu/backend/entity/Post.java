@@ -30,8 +30,9 @@ public class Post {
     private String tag;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id")
     private User user;
+
 
     @ManyToMany
          @JoinTable(
@@ -40,10 +41,6 @@ public class Post {
                  inverseJoinColumns = @JoinColumn(name = "user_id")
          )
     Set<User> likes;
-
-    public Set<User> getLikes() {
-        return likes;
-    }
 
 
 //    @OneToMany

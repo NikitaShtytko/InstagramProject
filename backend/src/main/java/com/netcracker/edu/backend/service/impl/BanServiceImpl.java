@@ -18,22 +18,22 @@ public class BanServiceImpl implements BanService {
     }
 
     @Override
-    public Optional<Ban> getBansById(Long id) {
+    public Optional<Ban> getById(Long id) {
         return banRepository.findById(id);
     }
 
     @Override
-    public Iterable<Ban> getAllBans() {
+    public Iterable<Ban> getAll() {
         return banRepository.findAll();
     }
 
     @Override
-    public void deleteBans(Long id) {
+    public void delete(Long id) {
         banRepository.deleteById(id);
     }
 
     @Override
-    public Ban saveBans(Ban ban) {
+    public Ban save(Ban ban) {
         return banRepository.save(ban);
     }
 }

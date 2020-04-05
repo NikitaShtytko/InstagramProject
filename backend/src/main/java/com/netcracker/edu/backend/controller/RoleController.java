@@ -31,11 +31,11 @@ public class RoleController {
 //    @PostMapping
     public Role saveRoles(@RequestBody Role role) {
         System.out.println("POST DETECTED");
-        return roleService.saveRoles(role);
+        return roleService.save(role);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteRoles(@PathVariable(name = "id") Long id) {
-        roleService.deleteRoles(id);
+        roleService.delete(id);
     }
 }

@@ -40,6 +40,8 @@ public class User {
     @JoinColumn(name = "ban_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;
 
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+//    private Set<Post> post;
 
 //    @OneToMany(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "post_id")

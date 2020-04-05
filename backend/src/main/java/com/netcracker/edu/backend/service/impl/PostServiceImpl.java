@@ -18,22 +18,22 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Optional<Post> getPostsById(Long id) {
+    public Optional<Post> getById(Long id) {
         return postRepository.findById(id);
     }
 
     @Override
-    public Iterable<Post> getAllPosts(){return postRepository.findAll(); }
+    public Iterable<Post> getAll(){return postRepository.findAll(); }
 
     @Override
-    public Post savePosts(Post post) {
+    public Post save(Post post) {
         System.out.println("SAVE POST DETECTED");
 //        sessionFactory.getCurrentSession().update(post.getLikes());
         return postRepository.save(post);
     }
 
     @Override
-    public void deletePosts(Long id) {
+    public void delete(Long id) {
         postRepository.deleteById(id); }
 
 }

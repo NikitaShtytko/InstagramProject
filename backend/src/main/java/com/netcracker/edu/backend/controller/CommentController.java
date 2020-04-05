@@ -21,24 +21,24 @@ public class CommentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Comment> getCommentsById(@PathVariable(name = "id") Long id) {
-        Optional<Comment> comments = commentService.getCommentsById(id);
+        Optional<Comment> comments = commentService.getById(id);
         return comments.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Comment> getAllComments() {
         System.out.println("GET DETECTED");
-        return commentService.getAllComments();
+        return commentService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping
     public Comment saveComments(@RequestBody Comment comment) {
-        return commentService.saveComments(comment);
+        return commentService.save(comment);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteComments(@PathVariable(name = "id") Long id) {
-        commentService.deleteComments(id);
+        commentService.delete(id);
     }
 }

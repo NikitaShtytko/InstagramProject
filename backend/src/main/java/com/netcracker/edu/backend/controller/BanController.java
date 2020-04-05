@@ -23,25 +23,25 @@ public class BanController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Ban> getBansById(@PathVariable(name = "id") Long id) {
-        Optional<Ban> bans = banService.getBansById(id);
+        Optional<Ban> bans = banService.getById(id);
         return bans.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Ban> getAllBans() {
         System.out.println("GET DETECTED");
-        return banService.getAllBans();
+        return banService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping
     public Ban saveBans(@RequestBody Ban ban) {
         System.out.println("POST DETECTED");
-        return banService.saveBans(ban);
+        return banService.save(ban);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteBans(@PathVariable(name = "id") Long id) {
-        banService.deleteBans(id);
+        banService.delete(id);
     }
 }

@@ -18,21 +18,21 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Optional<Role> getRolesById(Long id) {
+    public Optional<Role> getById(Long id) {
         return roleRepository.findById(id);
     }
 
     @Override
-    public Iterable<Role> getAllRoles(){
+    public Iterable<Role> getAll(){
 
         return roleRepository.findAll(); }
 
     @Override
-    public Role saveRoles(Role role) {
+    public Role save(Role role) {
         return roleRepository.save(role);
     }
 
     @Override
-    public void deleteRoles(Long id) {
+    public void delete(Long id) {
         roleRepository.deleteById(id); }
 }

@@ -27,25 +27,25 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUsersById(@PathVariable(name = "id") Long id) {
-        Optional<User> users = userService.getUsersById(id);
+        Optional<User> users = userService.getById(id);
         return users.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<User> getAllUsers() {
         System.out.println("GET DETECTED");
-        return userService.getAllUsers();
+        return userService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping
     public User saveUsers(@RequestBody User user) {
         System.out.println("POST DETECTED");
-        return userService.saveUsers(user);
+        return userService.save(user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteUsers(@PathVariable(name = "id") Long id) {
-        userService.deleteUsers(id);
+        userService.delete(id);
     }
 }

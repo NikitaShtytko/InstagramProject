@@ -19,22 +19,22 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public Optional<Comment> getCommentsById(Long id) {
+    public Optional<Comment> getById(Long id) {
         return commentRepository.findById(id);
     }
 
     @Override
-    public Comment saveComments(Comment comment) {
+    public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
 
     @Override
-    public void deleteComments(Long id) {
+    public void delete(Long id) {
         commentRepository.deleteById(id);
     }
 
     @Override
-    public Iterable<Comment> getAllComments() {
+    public Iterable<Comment> getAll() {
         return commentRepository.findAll();
     }
 }

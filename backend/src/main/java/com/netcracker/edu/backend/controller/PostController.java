@@ -20,25 +20,25 @@ public class PostController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Post> getPostsById(@PathVariable(name = "id") Long id) {
-        Optional<Post> posts = postService.getPostsById(id);
+        Optional<Post> posts = postService.getById(id);
         return posts.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Post> getAllPosts() {
         System.out.println("GET DETECTED");
-        return postService.getAllPosts();
+        return postService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping
     public Post savePosts(@RequestBody Post post) {
         System.out.println("POST DETECTED");
-        return postService.savePosts(post);
+        return postService.save(post);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePosts(@PathVariable(name = "id") Long id) {
-        postService.deletePosts(id);
+        postService.delete(id);
     }
 }

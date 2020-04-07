@@ -1,3 +1,5 @@
+//TODO delete this model
+
 package com.netcracker.edu.fapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

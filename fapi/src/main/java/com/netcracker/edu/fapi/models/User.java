@@ -7,17 +7,24 @@ public class User {
 
     private long id;
     private String login;
+    private String email;
     private String password;
-    private String role;
+    private String firstName;
+    private String lastName;
+    private String gender;
+
 
     public User() {
     }
 
-    public User(long id, String login, String password, String role) {
+    public User(long id, String login, String email, String password, String firstName, String lastName, String gender){
         this.id = id;
         this.login = login;
         this.password = password;
-        this.role = role;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
     }
 
     public long getId() {
@@ -32,6 +39,38 @@ public class User {
         return login;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -44,21 +83,16 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }

@@ -16,6 +16,7 @@ public class Tag {
 
     private String txt;
 
-//    @ManyToMany(mappedBy = "tags")
+//    @ManyToMany
+//    @JoinTable(name = "tag")
 //    private List<Post> post = new ArrayList<>();
 }

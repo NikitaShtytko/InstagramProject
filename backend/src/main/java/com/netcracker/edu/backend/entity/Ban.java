@@ -3,6 +3,7 @@ package com.netcracker.edu.backend.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -14,12 +15,9 @@ public class Ban{
 
     private String txt;
 
-    private String date;
+    private Timestamp date;
 
-    @Column(name = "user_id")
-    private Long userId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+//    private User user;
 }

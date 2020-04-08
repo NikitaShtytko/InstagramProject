@@ -14,15 +14,9 @@ public class Comment {
 
     private String txt;
 
-    @Column(name = "post_id", insertable = false, updatable = false)
-    private Long postId;
-
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
-
-    @ManyToOne
-    @JoinColumn(name = "post_id", insertable = false, updatable = false)
-    private Post post;
+//    @ManyToOne
+//    @JoinColumn(name = "post_id", insertable = false, updatable = false)
+//    private Post post;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)

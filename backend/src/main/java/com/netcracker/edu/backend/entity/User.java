@@ -37,7 +37,7 @@ public class User {
 
     //todo Простестировать работу OneToMany relationship.
     @OneToMany()
-    @JoinColumn(name = "ban_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;
 
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")

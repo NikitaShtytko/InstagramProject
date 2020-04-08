@@ -1,20 +1,15 @@
 package com.netcracker.edu.backend.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +20,7 @@ public class Post {
 
     private String txt;
 
-    private String date;
+    private Timestamp date;
 
     private String place;
 
@@ -48,10 +43,10 @@ public class Post {
 //    @OneToMany
 //    @JoinColumn(name = "post_id")
 //    private List<Like> like;
-//
-//    @OneToMany
-//    @JoinColumn(name = "post_id")
-//    private List<Comment> comment;
+
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private List<Comment> comment;
 
 
 

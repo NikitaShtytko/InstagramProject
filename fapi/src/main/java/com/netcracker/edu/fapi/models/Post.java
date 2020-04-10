@@ -1,8 +1,6 @@
 package com.netcracker.edu.fapi.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Post {
     private Long id;
     private Long photo;
@@ -11,7 +9,6 @@ public class Post {
     private String place;
 
     public Post(){
-
     }
 
     public Post(Long id, Long photo, String txt, String date, String place) {

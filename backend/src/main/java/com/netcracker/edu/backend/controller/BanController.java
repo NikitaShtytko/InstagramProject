@@ -19,8 +19,6 @@ public class BanController {
         this.banService = banService;
     }
 
-
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Ban> getBansById(@PathVariable(name = "id") Long id) {
         Optional<Ban> bans = banService.getById(id);

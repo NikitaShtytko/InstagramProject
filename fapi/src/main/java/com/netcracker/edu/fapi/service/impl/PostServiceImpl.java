@@ -1,41 +1,40 @@
-package com.netcracker.edu.backend.service.impl;
+package com.netcracker.edu.fapi.service.impl;
 
-import com.netcracker.edu.backend.entity.Post;
-import com.netcracker.edu.backend.repository.PostRepository;
-import com.netcracker.edu.backend.service.PostService;
-import org.springframework.stereotype.Service;
+import com.netcracker.edu.fapi.models.Post;
+import com.netcracker.edu.fapi.service.PostService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.Collections;
 
-@Service
-public class PostServiceImpl implements PostService {
+public class PostServiceImpl implements PostService{
 
-    final
-    PostRepository postRepository;
+    @Value("${backend.server.url}")
+    private String backendServerUrl;
 
-    public PostServiceImpl(PostRepository postRepository) {
-        this.postRepository = postRepository;
+    @Override
+    public Iterable<Post> getAll() {
+        RestTemplate restTemplate = new RestTemplate();
+        Post[] post = restTemplate.getForObject(backendServerUrl + "/api/posts", Post[].class);
+        return post == null ? Collections.emptyList() : Arrays.asList(post);
     }
 
     @Override
-    public Optional<Post> getById(Long id) {
-        return postRepository.findById(id);
+    public Post getById(Long id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/posts", Post.class);
     }
 
     @Override
-    public Iterable<Post> getAll(){return postRepository.findAll(); }
-
-    @Override
-    public Post save(Post post) {
-        System.out.println("SAVE POST DETECTED");
-//        sessionFactory.getCurrentSession().update(post.getLikes());
-        return postRepository.save(post);
+    public Post save(Post entity) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(backendServerUrl + "/api/posts", entity, Post.class).getBody();
     }
 
     @Override
     public void delete(Long id) {
-        postRepository.deleteById(id); }
-
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendServerUrl + "/api/posts" + id);
+    }
 }
-
-

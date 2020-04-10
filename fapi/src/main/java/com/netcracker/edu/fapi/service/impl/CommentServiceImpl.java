@@ -1,39 +1,41 @@
-package com.netcracker.edu.backend.service.impl;
+package com.netcracker.edu.fapi.service.impl;
 
-import com.netcracker.edu.backend.entity.Comment;
-import com.netcracker.edu.backend.repository.CommentRepository;
-import com.netcracker.edu.backend.service.CommentService;
-import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.netcracker.edu.fapi.models.Comment;
+import com.netcracker.edu.fapi.service.CommentService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
 
-@Service
+import java.util.Arrays;
+import java.util.Collections;
+
 public class CommentServiceImpl implements CommentService {
 
-    final
-    CommentRepository commentRepository;
+    @Value("${backend.server.url}")
+    private String backendServerUrl;
 
-    public CommentServiceImpl(CommentRepository commentRepository) {
-        this.commentRepository = commentRepository;
+    @Override
+    public Iterable<Comment> getAll() {
+        RestTemplate restTemplate = new RestTemplate();
+        Comment[] comment = restTemplate.getForObject(backendServerUrl + "/api/comments", Comment[].class);
+        return comment == null ? Collections.emptyList() : Arrays.asList(comment);
     }
 
     @Override
-    public Optional<Comment> getById(Long id) {
-        return commentRepository.findById(id);
+    public Comment getById(Long id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/comments", Comment.class);
     }
 
     @Override
-    public Comment save(Comment comment) {
-        return commentRepository.save(comment);
+    public Comment save(Comment entity) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(backendServerUrl + "/api/comment", entity, Comment.class).getBody();
     }
 
     @Override
     public void delete(Long id) {
-        commentRepository.deleteById(id);
-    }
-
-    @Override
-    public Iterable<Comment> getAll() {
-        return commentRepository.findAll();
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendServerUrl + "/api/comments" + id);
     }
 }

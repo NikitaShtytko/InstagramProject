@@ -39,11 +39,6 @@ public class Post {
          )
     Set<User> likes;
 
-
-//    @OneToMany
-//    @JoinColumn(name = "post_id")
-//    private List<Like> like;
-
     @OneToMany
     @JoinColumn(name = "post_id")
     private List<Comment> comment;

@@ -58,6 +58,12 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.nc.trainings</groupId>
+            <artifactId>Backend</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

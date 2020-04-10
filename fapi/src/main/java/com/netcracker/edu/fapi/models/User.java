@@ -1,8 +1,6 @@
 package com.netcracker.edu.fapi.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private long id;
@@ -11,20 +9,36 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private String gender;
+    private UserRole role;
+    private UserGender gender;
 
 
     public User() {
     }
 
-    public User(long id, String login, String email, String password, String firstName, String lastName, String gender){
+    public User(long id, String login, String email, String password, String firstName, String lastName) {
         this.id = id;
         this.login = login;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public UserGender getGender() {
+        return gender;
+    }
+
+    public void setGender(UserGender gender) {
         this.gender = gender;
+    }
+
+    public UserRole getRole(){
+        return role;
+    }
+
+    public void setRole(UserRole role){
+        this.role = role;
     }
 
     public long getId() {
@@ -55,10 +69,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -67,9 +77,6 @@ public class User {
         return lastName;
     }
 
-    public String getGender() {
-        return gender;
-    }
 
     public void setLogin(String login) {
         this.login = login;
@@ -92,7 +99,15 @@ public class User {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
+                ", gender='" +  + '\'' +
                 '}';
     }
+
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 }

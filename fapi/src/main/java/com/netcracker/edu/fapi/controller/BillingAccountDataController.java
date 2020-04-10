@@ -21,7 +21,7 @@ public class BillingAccountDataController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<BillingAccountViewModel> saveBillingAccount(@RequestBody BillingAccountViewModel billingAccount /*todo server validation*/) {
+    public ResponseEntity<BillingAccountViewModel> saveBillingAccount(@RequestBody BillingAccountViewModel billingAccount) {
         if (billingAccount != null) {
             return ResponseEntity.ok(billingAccountDataService.saveBillingAccount(billingAccount));
         }

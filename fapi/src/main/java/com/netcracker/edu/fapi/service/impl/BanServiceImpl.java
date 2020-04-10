@@ -1,39 +1,41 @@
-package com.netcracker.edu.backend.service.impl;
+package com.netcracker.edu.fapi.service.impl;
 
-import com.netcracker.edu.backend.entity.Ban;
-import com.netcracker.edu.backend.repository.BanRepository;
-import com.netcracker.edu.backend.service.BanService;
-import org.springframework.stereotype.Service;
+import com.netcracker.edu.fapi.models.Ban;
+import com.netcracker.edu.fapi.service.BanService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.Collections;
 
-@Service
 public class BanServiceImpl implements BanService {
 
-    final
-    BanRepository banRepository;
+    @Value("${backend.server.url}")
+    private String backendServerUrl;
 
-    public BanServiceImpl(BanRepository banRepository) {
-        this.banRepository = banRepository;
-    }
-
-    @Override
-    public Optional<Ban> getById(Long id) {
-        return banRepository.findById(id);
-    }
 
     @Override
     public Iterable<Ban> getAll() {
-        return banRepository.findAll();
+        RestTemplate restTemplate = new RestTemplate();
+        Ban[] ban = restTemplate.getForObject(backendServerUrl + "/api/bans", Ban[].class);
+        return ban == null ? Collections.emptyList() : Arrays.asList(ban);
+    }
+
+    @Override
+    public Ban getById(Long id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/bans", Ban.class);
+    }
+
+    @Override
+    public Ban save(Ban entity) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(backendServerUrl + "/api/bans", entity, Ban.class).getBody();
     }
 
     @Override
     public void delete(Long id) {
-        banRepository.deleteById(id);
-    }
-
-    @Override
-    public Ban save(Ban ban) {
-        return banRepository.save(ban);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendServerUrl + "/api/bans", id);
     }
 }

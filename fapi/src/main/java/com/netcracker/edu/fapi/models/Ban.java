@@ -10,7 +10,6 @@ public class Ban {
     private String date;
 
     public Ban(){
-
     }
 
     public Ban(Long id, String txt, String date) {

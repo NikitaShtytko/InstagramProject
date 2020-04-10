@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,12 +15,13 @@ public class Comment {
 
     private String txt;
 
-//    @ManyToOne
-//    @JoinColumn(name = "post_id", insertable = false, updatable = false)
-//    private Post post;
-
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "post_id", insertable = false, updatable = false)
+    private Post post;
 }
 

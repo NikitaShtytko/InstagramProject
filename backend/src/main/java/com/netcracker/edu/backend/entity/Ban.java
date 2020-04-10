@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public class Ban{
 
     private Timestamp date;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-//    private User user;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+    private User user;
 }

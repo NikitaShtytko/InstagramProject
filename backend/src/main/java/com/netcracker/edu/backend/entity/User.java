@@ -1,9 +1,11 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+
 
 @Entity
 @Data
@@ -31,25 +33,29 @@ public class User {
     @Column(name = "gender")
     private String gender;
 
-    @ManyToOne()
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    @Column(name = "role")
+    private String role;
 
-    //todo Простестировать работу OneToMany relationship.
+    @Column(name = "status")
+    private String status;
+
+//    @ManyToOne()
+//    @JoinColumn(name = "role_id", nullable = false)
+//    private Role role;
+
     @OneToMany()
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-//    private Set<Post> post;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id")
+    private List<Post> post;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "post_id")
-//    private List<Post> post;
-
-//    @OneToMany
-//    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-//    private List<Comment> comment;
+    @JsonIgnore
+    @OneToMany
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private List<Comment> comment;
 }
 
 

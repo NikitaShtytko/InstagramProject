@@ -1,40 +1,40 @@
-package com.netcracker.edu.backend.service.impl;
+package com.netcracker.edu.fapi.service.impl;
 
-import com.netcracker.edu.backend.entity.Tag;
-import com.netcracker.edu.backend.repository.TagRepository;
-import com.netcracker.edu.backend.service.TagService;
-import org.springframework.stereotype.Service;
+import com.netcracker.edu.fapi.models.Tag;
+import com.netcracker.edu.fapi.service.TagService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.Collections;
 
-@Service
 public class TagServiceImpl implements TagService {
 
-    final
-    TagRepository tagRepository;
-
-    public TagServiceImpl(TagRepository tagRepository) {
-        this.tagRepository = tagRepository;
-    }
-
-
-    @Override
-    public Optional<Tag> getById(Long id) {
-        return tagRepository.findById(id);
-    }
+    @Value("${backend.server.url}")
+    private String backendServerUrl;
 
     @Override
     public Iterable<Tag> getAll() {
-        return tagRepository.findAll();
+        RestTemplate restTemplate = new RestTemplate();
+        Tag[] tag = restTemplate.getForObject(backendServerUrl + "/api/tags/", Tag[].class);
+        return tag == null ? Collections.emptyList() : Arrays.asList(tag);
     }
 
     @Override
-    public Tag save(Tag tag) {
-        return tagRepository.save(tag);
+    public Tag getById(Long id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/tags/" + id, Tag.class);
+    }
+
+    @Override
+    public Tag save(Tag account) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(backendServerUrl + "/api/tags", account, Tag.class).getBody();
     }
 
     @Override
     public void delete(Long id) {
-        tagRepository.deleteById(id);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendServerUrl + "/api/tags/" + id);
     }
 }

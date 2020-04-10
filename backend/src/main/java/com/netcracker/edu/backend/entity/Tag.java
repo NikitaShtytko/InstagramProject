@@ -1,8 +1,11 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,7 +19,8 @@ public class Tag {
 
     private String txt;
 
-//    @ManyToMany
-//    @JoinTable(name = "tag")
-//    private List<Post> post = new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "tag")
+    private List<Post> post = new ArrayList<>();
 }

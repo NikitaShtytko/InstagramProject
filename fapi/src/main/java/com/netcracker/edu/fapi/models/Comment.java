@@ -11,7 +11,6 @@ public class Comment {
     private Long userId;
 
     public Comment(){
-
     }
 
     public Comment(Long id, String txt, Long postId, Long userId) {

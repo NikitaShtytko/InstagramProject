@@ -1,8 +1,8 @@
 package com.netcracker.edu.fapi.models;
 
 public enum UserRole{
-    MEN("1", "admin"),
-    WOMEN("2", "user");
+    ADMIN("1", "admin"),
+    USER("2", "user");
 
     UserRole() {
     }

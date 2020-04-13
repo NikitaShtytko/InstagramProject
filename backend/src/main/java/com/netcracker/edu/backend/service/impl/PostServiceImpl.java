@@ -23,7 +23,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Iterable<Post> getAll(){return postRepository.findAll(); }
+    public Iterable<Post> getAll() {
+        return postRepository.findAll();
+    }
 
     @Override
     public Post save(Post post) {
@@ -35,7 +37,6 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(Long id) {
         postRepository.deleteById(id); }
-
 }
 
 

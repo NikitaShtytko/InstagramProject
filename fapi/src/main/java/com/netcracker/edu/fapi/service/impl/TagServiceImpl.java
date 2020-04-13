@@ -3,11 +3,13 @@ package com.netcracker.edu.fapi.service.impl;
 import com.netcracker.edu.fapi.models.Tag;
 import com.netcracker.edu.fapi.service.TagService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Collections;
 
+@Service
 public class TagServiceImpl implements TagService {
 
     @Value("${backend.server.url}")
@@ -29,7 +31,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag save(Tag account) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(backendServerUrl + "/api/tags", account, Tag.class).getBody();
+        return restTemplate.postForEntity(backendServerUrl + "/api/tags/", account, Tag.class).getBody();
     }
 
     @Override

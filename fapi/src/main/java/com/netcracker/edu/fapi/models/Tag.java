@@ -10,7 +10,6 @@ public class Tag {
     private String txt;
 
     public Tag(){
-
     }
 
     public Tag(Long id, String tag, String txt) {

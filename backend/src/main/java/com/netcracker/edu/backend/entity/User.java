@@ -1,6 +1,5 @@
 package com.netcracker.edu.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -39,24 +38,17 @@ public class User {
     @Column(name = "status")
     private String status;
 
-//    @ManyToOne()
-//    @JoinColumn(name = "role_id", nullable = false)
-//    private Role role;
-
     @OneToMany()
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "post_id")
-    private List<Post> post;
-
-    @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private List<Comment> comment;
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "post_id")
+//    private List<Post> post;
+//
+//    @JsonIgnore
+//    @OneToMany
+//    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+//    private List<Comment> comment;
 }
-
-
-//TODO generic

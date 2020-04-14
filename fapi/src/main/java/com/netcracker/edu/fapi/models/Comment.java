@@ -1,55 +1,13 @@
 package com.netcracker.edu.fapi.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Comment {
 
     private Long id;
     private String txt;
-    private Long postId;
-    private Long userId;
-
-    public Comment(){
-    }
-
-    public Comment(Long id, String txt, Long postId, Long userId) {
-        this.id = id;
-        this.txt = txt;
-        this.postId = postId;
-        this.userId = userId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTxt() {
-        return txt;
-    }
-
-    public void setTxt(String txt) {
-        this.txt = txt;
-    }
-
-    public Long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    private User user;
 }
 

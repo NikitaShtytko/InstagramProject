@@ -19,25 +19,25 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Iterable<Comment> getAll() {
         RestTemplate restTemplate = new RestTemplate();
-        Comment[] comment = restTemplate.getForObject(backendServerUrl + "/api/comments/", Comment[].class);
+        Comment[] comment = restTemplate.getForObject(backendServerUrl + "api/comments/", Comment[].class);
         return comment == null ? Collections.emptyList() : Arrays.asList(comment);
     }
 
     @Override
     public Comment getById(Long id) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(backendServerUrl + "/api/comments/" + id, Comment.class);
+        return restTemplate.getForObject(backendServerUrl + "api/comments/" + id, Comment.class);
     }
 
     @Override
     public Comment save(Comment entity) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(backendServerUrl + "/api/comments/", entity, Comment.class).getBody();
+        return restTemplate.postForEntity(backendServerUrl + "api/comments/", entity, Comment.class).getBody();
     }
 
     @Override
     public void delete(Long id) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(backendServerUrl + "/api/comments/" + id);
+        restTemplate.delete(backendServerUrl + "api/comments/" + id);
     }
 }

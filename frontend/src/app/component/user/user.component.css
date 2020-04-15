@@ -1,0 +1,8 @@
+.thead-dark{
+  background-color: lightgray;
+}
+
+.thead-dark-child{
+  background-color: lightblue;
+  text-align: center;
+}

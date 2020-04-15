@@ -26,7 +26,7 @@ public class Post {
 
     //private String tag;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 

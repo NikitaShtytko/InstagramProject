@@ -15,7 +15,6 @@ public class PostController {
 
     @RequestMapping
     public ResponseEntity<Iterable<Post>> getAllPosts(){
-        System.out.println("Fapi All posts");
         return ResponseEntity.ok(postService.getAll());
     }
 

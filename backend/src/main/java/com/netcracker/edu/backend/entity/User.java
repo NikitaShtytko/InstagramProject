@@ -38,7 +38,7 @@ public class User {
     @Column(name = "status")
     private String status;
 
-    @OneToMany()
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;
 

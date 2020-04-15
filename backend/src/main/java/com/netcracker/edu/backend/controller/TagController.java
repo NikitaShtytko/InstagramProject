@@ -18,25 +18,24 @@ public class TagController {
     public TagController(TagService tagService){this.tagService = tagService;}
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Tag> getTagsById(@PathVariable(name = "id") Long id) {
-        Optional<Tag> tags = tagService.getById(id);
-        return tags.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Tag> getTagById(@PathVariable(name = "id") Long id) {
+        Optional<Tag> tag = tagService.getById(id);
+        return tag.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Tag> getAllTags() {
-        System.out.println("GET DETECTED");
         return tagService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
 //    @PostMapping
-    public Tag saveTags(@RequestBody Tag tag) {
+    public Tag saveTag(@RequestBody Tag tag) {
         return tagService.save(tag);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteTags(@PathVariable(name = "id") Long id) {
+    public void deleteTag(@PathVariable(name = "id") Long id) {
         tagService.delete(id);
     }
 }

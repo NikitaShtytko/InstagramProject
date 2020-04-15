@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -20,32 +21,29 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login/{login}", method = RequestMethod.GET)
-    public ResponseEntity<User> getUsersByLogin(@PathVariable(name = "login") String login) {
+    public ResponseEntity<User> getUserByLogin(@PathVariable(name = "login") String login) {
         User user = userService.findByLogin(login);
         return ResponseEntity.ok(user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<User> getUsersById(@PathVariable(name = "id") Long id) {
-        Optional<User> users = userService.getById(id);
-        return users.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<User> getUserById(@PathVariable(name = "id") Long id) {
+        Optional<User> user = userService.getById(id);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<User> getAllUsers() {
-        System.out.println("GET DETECTED");
         return userService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-//    @PostMapping
-    public User saveUsers(@RequestBody User user) {
-        System.out.println("POST DETECTED");
+    public User saveUser(@RequestBody User user) {
         return userService.save(user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteUsers(@PathVariable(name = "id") Long id) {
+    public void deleteUser(@PathVariable(name = "id") Long id) {
         userService.delete(id);
     }
 }

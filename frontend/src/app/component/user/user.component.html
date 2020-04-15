@@ -1,0 +1,30 @@
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Login</th>
+    <th scope="col">E-mail</th>
+    <th scope="col">Имя</th>
+    <th scope="col">Фамилия</th>
+    <th scope="col">роль</th>
+    <th scope="col">пол</th>
+    <th scope="col">статус</th>
+    <th scope="col">текст бана</th>
+
+  </tr>
+  </thead>
+  <tbody class="thead-dark-child">
+  <tr *ngFor="let s of user; let r = index ">
+    <td>{{s.id}}</td>
+    <td>{{s.login}}</td>
+    <td>{{s.email}}</td>
+    <td>{{s.firstName}}</td>
+    <td>{{s.lastName}}</td>
+    <td>{{s.role}}</td>
+    <td>{{s.gender}}</td>
+    <td>{{s.status}}</td>
+    <td>{{s.ban.txt}}</td>
+  </tr>
+  </tbody>
+</table>
+

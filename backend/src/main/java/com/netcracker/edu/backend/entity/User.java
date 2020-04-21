@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -42,10 +43,10 @@ public class User {
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;
 
-//    @JsonIgnore
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "post_id")
-//    private List<Post> post;
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id")
+    private List<Post> post;
 //
 //    @JsonIgnore
 //    @OneToMany

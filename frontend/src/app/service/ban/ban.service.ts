@@ -1,4 +1,4 @@
-import {Ban} from "../../models/ban";
+import {Ban} from "../../moduls/ban";
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";

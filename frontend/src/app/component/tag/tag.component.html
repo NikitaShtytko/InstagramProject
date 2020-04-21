@@ -1,0 +1,18 @@
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Tag</th>
+    <th scope="col">Text</th>
+
+
+  </tr>
+  </thead>
+  <tbody class="thead-dark-child">
+  <tr *ngFor="let s of tag; let r = index ">
+    <td>{{s.id}}</td>
+    <td>{{s?.tag}}</td>
+    <td>{{s?.txt}}</td>
+  </tr>
+  </tbody>
+</table>

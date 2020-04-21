@@ -1,0 +1,19 @@
+<table class="table">
+
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Txt</th>
+    <th scope="col">User</th>
+  </tr>
+
+  </thead>
+  <tbody class="thead-dark-child">
+  <tr *ngFor="let s of comments; let r = index ">
+    <td>{{s.id}}</td>
+    <td>{{s.txt}}</td>
+    <td>{{s.user?.login}}</td>
+  </tr>
+  </tbody>
+</table>
+

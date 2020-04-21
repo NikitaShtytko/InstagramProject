@@ -1,0 +1,60 @@
+<div class="body">
+  <div class="user-info">
+  <div class="left-column">
+    <img id="user-photo" src="user-icon.jpg"/>
+  </div>
+  <div class="right-column">
+    <table>
+      <tr>
+        <td>Login</td>
+        <td>{{user.login}}</td>
+      </tr>
+      <tr>
+        <td>E-mail</td>
+        <td>{{user.email}}</td>
+      </tr>
+      <tr>
+        <td>First Name</td>
+        <td>{{user.firstName}}</td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td>{{user.lastName}}</td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>{{user.gender}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Photo</th>
+      <th scope="col">Text</th>
+      <th scope="col">Date</th>
+      <th scope="col">User</th>
+      <th scope="col">Comment</th>
+      <th scope="col">Tag</th>
+      <th scope="col">Like</th>
+
+    </tr>
+    </thead>
+    <tbody class="thead-dark-child">
+    <tr *ngFor="let s of post; let r = index ">
+      <td>{{s.id}}</td>
+      <td>{{s.photo}}</td>
+      <td>{{s.txt}}</td>
+      <td>{{s.date}}</td>
+      <td>{{s.user.login}}</td>
+      <td>{{s.comment?.length}}</td>
+      <td>{{s.tag?.length}}</td>
+      <td>{{s.like?.length}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>

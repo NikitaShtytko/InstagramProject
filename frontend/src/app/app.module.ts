@@ -16,6 +16,8 @@ import {CommentsComponent} from './component/comments/comments.component';
 import {PostComponent} from './component/post/post.component';
 import {TagComponent} from './component/tag/tag.component';
 import {UserHomePageComponent} from './component/user-home-page/user-home-page.component';
+import {LoginComponent} from './component/login/login.component';
+import {RegisterComponent} from './component/register/register.component';
 
 const appRoutes: Routes = [
   {path: '', component: UserComponent},
@@ -25,11 +27,9 @@ const appRoutes: Routes = [
   {path: 'tag', component: TagComponent},
   {path: 'user', component: UserComponent},
   {path: 'user-home-page', component: UserHomePageComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
 ];
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -40,7 +40,9 @@ const appRoutes: Routes = [
     CommentsComponent,
     PostComponent,
     TagComponent,
-    UserHomePageComponent
+    UserHomePageComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

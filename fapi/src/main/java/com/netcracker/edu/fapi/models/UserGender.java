@@ -1,8 +1,8 @@
 package com.netcracker.edu.fapi.models;
 
 public enum UserGender{
-    MEN("1", "men"),
-    WOMEN("2", "women");
+    MEN("1", "male"),
+    WOMEN("2", "female");
 
     UserGender() {
     }

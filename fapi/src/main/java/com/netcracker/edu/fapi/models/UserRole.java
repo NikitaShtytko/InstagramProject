@@ -12,28 +12,28 @@ public enum UserRole{
         return "UserRole{}";
     }
 
-    private String genderDescription;
-    private String genderId;
+    private String roleDescription;
+    private String roleId;
 
     public String getRoleDescription() {
-        return genderDescription;
+        return roleDescription;
     }
 
-    public void setRoleDescription(String genderDescription) {
-        this.genderDescription = genderDescription;
+    public void setRoleDescription(String roleDescription) {
+        this.roleDescription = roleDescription;
     }
 
     public String getRoleId() {
-        return genderId;
+        return roleId;
     }
 
     public void setRoleId(String genderId) {
-        this.genderId = genderId;
+        this.roleId = genderId;
     }
 
-    UserRole(String genderDescription, String genderId) {
-        this.genderDescription = genderDescription;
-        this.genderId = genderId;
+    UserRole(String roleDescription, String roleId) {
+        this.roleDescription = roleDescription;
+        this.roleId = roleId;
     }
 }
 

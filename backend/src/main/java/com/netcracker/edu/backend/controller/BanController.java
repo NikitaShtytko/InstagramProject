@@ -2,12 +2,14 @@ package com.netcracker.edu.backend.controller;
 
 import com.netcracker.edu.backend.entity.Ban;
 import com.netcracker.edu.backend.service.BanService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Log4j2
 @RestController
 @RequestMapping("/api/bans")
 public class BanController {
@@ -22,6 +24,7 @@ public class BanController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Ban> getBanById(@PathVariable(name = "id") Long id) {
         Optional<Ban> bans = banService.getById(id);
+        log.info("Get Info By Info");
         return bans.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

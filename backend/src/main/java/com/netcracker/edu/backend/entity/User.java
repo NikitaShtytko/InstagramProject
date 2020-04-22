@@ -44,10 +44,11 @@ public class User {
     private List<Ban> ban;
 
     @JsonIgnore
+//    @JsonBackReference
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
-    private List<Post> post;
-//
+    private List<Post> posts;
+
 //    @JsonIgnore
 //    @OneToMany
 //    @JoinColumn(name = "user_id", insertable = false, updatable = false)

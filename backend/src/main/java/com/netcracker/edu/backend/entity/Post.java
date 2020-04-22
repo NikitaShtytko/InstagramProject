@@ -26,11 +26,10 @@ public class Post {
 
     //private String tag;
 
-
+//    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-
 
     @ManyToMany
          @JoinTable(
@@ -43,8 +42,6 @@ public class Post {
     @OneToMany
     @JoinColumn(name = "post_id")
     private List<Comment> comment;
-
-
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,

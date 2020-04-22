@@ -36,4 +36,10 @@ public class PostController {
     public void deletePost(@PathVariable String id) {
         postService.delete(Long.valueOf(id));
     }
+
+    @RequestMapping(value = "/user/{id}")
+    public  ResponseEntity<Iterable<Post>>getPostsByUserId(@PathVariable String id) throws InterruptedException {
+        Long postId = Long.valueOf(id);
+        return ResponseEntity.ok(postService.findByUserId(postId));
+    }
 }

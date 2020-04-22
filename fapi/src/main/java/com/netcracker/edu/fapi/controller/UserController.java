@@ -18,17 +18,24 @@ public class UserController {
     //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<User> getAllUsers(){
+        System.out.println("");
         return (List<User>) userService.getAll();
     }
 
-    @RequestMapping(value="/signup", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value="/id", method = RequestMethod.POST, produces = "application/json")
     public User saveUser(@RequestBody User user){
         return userService.save(user);
     }
 
-    @RequestMapping(value = "/{login}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public User getUserById(@PathVariable(name = "id") long id){
+//        return userService.findById(id);
+//    }
+
+    @RequestMapping(value = "/login/{login}", method = RequestMethod.GET)
     public User getUserByLogin(@PathVariable(name = "login") String login) {
         return userService.findByLogin(login);
     }
+
 
 }

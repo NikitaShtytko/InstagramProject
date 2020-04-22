@@ -39,4 +39,11 @@ public class PostServiceImpl implements PostService{
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendServerUrl + "/api/posts/" + id);
     }
+
+    @Override
+    public Iterable<Post> findByUserId(Long id) {
+        RestTemplate restTemplate = new RestTemplate();
+        Post[] post = restTemplate.getForObject(backendServerUrl + "/api/posts/user/" + id, Post[].class);
+        return post == null ? Collections.emptyList() : Arrays.asList(post);
+    }
 }

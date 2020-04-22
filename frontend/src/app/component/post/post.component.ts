@@ -11,15 +11,20 @@ import {PostService} from '../../service/post/post.service';
 export class PostComponent implements OnInit {
 
   constructor(private postService: PostService) {}
-  public post: Post[];
+  public posts: Post[];
 
   public subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    this.getPosts();
+    // this.getPosts();
+    this.getPostsByUserId(2);
   }
 
   public getPosts(): void{
-    this.subscriptions.push(this.postService.getPosts().subscribe(response => {this.post = response; console.log(response); }));
+    this.subscriptions.push(this.postService.getPosts().subscribe(response => {this.posts = response; console.log(response); }));
+  }
+
+  public getPostsByUserId(id: number): void{
+    this.subscriptions.push(this.postService.getPostsByUserId(id).subscribe(response => {this.posts = response; console.log(response); }));
   }
 }

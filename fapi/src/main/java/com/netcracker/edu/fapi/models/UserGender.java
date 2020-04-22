@@ -1,39 +1,46 @@
 package com.netcracker.edu.fapi.models;
 
-public enum UserGender{
-    MEN("1", "male"),
-    WOMEN("2", "female");
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    UserGender() {
+//@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+public enum UserGender{
+    MEN("MAN"),
+    WOMEN("WOMEN");
+
+    UserGender(String name) {
+        this.name = name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return "UserGender{}";
+        return getName();
     }
 
-    private String genderDescription;
-    private String genderId;
+//    @JsonCreator
+//    public static UserGender forValue(String name)
+//    {
+//        return EnumUtil.getEnumByNameIgnoreCase(UserGender.class, name);
+//    }
 
-    public String getGenderDescription() {
-        return genderDescription;
-    }
+    private String name;
 
-    public void setGenderDescription(String genderDescription) {
-        this.genderDescription = genderDescription;
-    }
-
-    public String getGenderId() {
-        return genderId;
-    }
-
-    public void setGenderId(String genderId) {
-        this.genderId = genderId;
-    }
-
-    UserGender(String genderDescription, String genderId) {
-        this.genderDescription = genderDescription;
-        this.genderId = genderId;
+    @JsonCreator
+    public static UserGender forValues(@JsonProperty("name") String name){
+        for (UserGender userGender : UserGender.values()) {
+            if (userGender.name.equals(name)){
+                return userGender;
+            }
+        }
+        return null;
     }
 }
 

@@ -12,8 +12,6 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-
-
     private UserRepository userRepository;
 
     @Autowired
@@ -43,6 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
+        if (user.getRole() == null) user.setRole("user");
+        if (user.getStatus() == null) user.setStatus("0");
         return userRepository.save(user);
     }
 }

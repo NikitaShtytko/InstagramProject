@@ -12,12 +12,13 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
+
   getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>('/api/users');
   }
 
   getUserByLogin(login: string): Observable<User> {
-    return this.httpClient.get<User>('/api/users/' + login);
+    return this.httpClient.get<User>('/api/users/login/' + login);
   }
 
   getUserById(id: number): Observable<User> {
@@ -25,7 +26,7 @@ export class UserService {
   }
 
   saveUser(user: User): Observable<User> {
-    return this.httpClient.post<User>('http://localhost:8080/api/users', user);
+    return this.httpClient.post<User>('/api/users', user);
   }
 
   updateUser(user: User): Observable<User> {

@@ -1,7 +1,7 @@
 import {User} from './user';
 import {Comments} from './comments';
 import {Tag} from './tag';
-import {Likee} from './likee';
+import {Like} from './like';
 
 export class Post{
 
@@ -11,6 +11,6 @@ export class Post{
   date: string;
   user: User;
   comment: Comments[];
-  tag: Tag[];
-  like: Likee[];
+  tags: Tag[];
+  likes: Like[];
 }

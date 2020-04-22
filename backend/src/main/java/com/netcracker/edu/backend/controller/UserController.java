@@ -29,11 +29,13 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable(name = "id") Long id) {
         Optional<User> user = userService.getById(id);
+        System.out.println("");
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<User> getAllUsers() {
+        System.out.println("");
         return userService.getAll();
     }
 

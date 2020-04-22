@@ -1,39 +1,39 @@
 package com.netcracker.edu.fapi.models;
 
-public enum UserRole{
-    ADMIN("1", "admin"),
-    USER("2", "user");
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    UserRole() {
+//@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+public enum UserRole{
+    admin("admin"),
+    user("user");
+
+    UserRole(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "UserRole{}";
+        return getName();
     }
 
-    private String roleDescription;
-    private String roleId;
+    private String name;
 
-    public String getRoleDescription() {
-        return roleDescription;
-    }
-
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String genderId) {
-        this.roleId = genderId;
-    }
-
-    UserRole(String roleDescription, String roleId) {
-        this.roleDescription = roleDescription;
-        this.roleId = roleId;
+    @JsonCreator
+    public static UserRole forValues(@JsonProperty("name") String name){
+        for (UserRole userRole : UserRole.values()) {
+            if (userRole.name.equals(name)){
+                return userRole;
+            }
+        }
+        return null;
     }
 }
-

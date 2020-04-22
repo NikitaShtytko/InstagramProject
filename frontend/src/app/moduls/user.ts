@@ -1,4 +1,5 @@
 import {Ban} from './ban';
+import {Post} from './post';
 
 export class User {
   id: number;
@@ -11,4 +12,5 @@ export class User {
   gender: string;
   status: string;
   ban: Ban[];
+  posts: Post[];
 }

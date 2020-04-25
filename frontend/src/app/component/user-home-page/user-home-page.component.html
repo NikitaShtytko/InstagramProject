@@ -7,28 +7,33 @@
     <table>
       <tr>
         <td>Login</td>
-        <td>{{user.login}}</td>
+        <td>{{user?.login}}</td>
       </tr>
       <tr>
         <td>E-mail</td>
-        <td>{{user.email}}</td>
+        <td>{{user?.email}}</td>
       </tr>
       <tr>
         <td>First Name</td>
-        <td>{{user.firstName}}</td>
+        <td>{{user?.firstName}}</td>
       </tr>
       <tr>
         <td>Last Name</td>
-        <td>{{user.lastName}}</td>
+        <td>{{user?.lastName}}</td>
       </tr>
       <tr>
         <td>Gender</td>
-        <td>{{user.gender}}</td>
+        <td>{{user?.gender}}</td>
       </tr>
+      <tr>
+      <td>Gender</td>
+      <td>{{user?.id}}</td>
+    </tr>
     </table>
   </div>
 </div>
-<div>
+  <button (click)="_UerPosts()">View posts</button>
+<div class="post-table">
   <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -36,7 +41,6 @@
       <th scope="col">Photo</th>
       <th scope="col">Text</th>
       <th scope="col">Date</th>
-      <th scope="col">User</th>
       <th scope="col">Comment</th>
       <th scope="col">Tag</th>
       <th scope="col">Like</th>
@@ -49,7 +53,6 @@
       <td>{{s.photo}}</td>
       <td>{{s.txt}}</td>
       <td>{{s.date}}</td>
-      <td>{{s.user.login}}</td>
       <td>{{s.comment?.length}}</td>
       <td>{{s.tags?.length}}</td>
       <td>{{s.likes?.length}}</td>

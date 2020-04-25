@@ -20,7 +20,7 @@ import {LoginComponent} from './component/login/login.component';
 import {RegisterComponent} from './component/register/register.component';
 
 const appRoutes: Routes = [
-  {path: '', component: UserComponent},
+  {path: 'home', component: UserComponent},
   {path: 'ban', component: BanComponent},
   {path: 'comments', component: CommentsComponent},
   {path: 'post', component: PostComponent},

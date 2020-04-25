@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../moduls/user';
 import {UserService} from '../../service/user/user.service';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,8 @@ import {Subscription} from 'rxjs';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+              private router: Router) {}
   public subscriptions: Subscription[] = [];
 
   public user: User = new User();
@@ -27,11 +29,4 @@ export class RegisterComponent implements OnInit {
   public gender(name: string): void{
     this.user.gender = name;
   }
-
-  public default(role: string, status: string){
-    this.user.role = role;
-    this.user.status = status;
-  }
-
-
 }

@@ -20,6 +20,10 @@ export class UserHomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserByLogin('VreDina');
+    console.log(this.user?.login);
+  }
+
+  _UerPosts(): void {
     this.getPostsByUserId(this.user.id);
   }
 

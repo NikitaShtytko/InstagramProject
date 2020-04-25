@@ -39,3 +39,13 @@ td{
   height: 360px;
   width: 360px;
 }
+
+.table{
+  margin-inline-start: auto;
+  margin-top: 3%;
+  width: 100%;
+}
+
+.table tr{
+  background-color: lightskyblue;
+}

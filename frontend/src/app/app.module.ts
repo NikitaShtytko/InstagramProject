@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -44,16 +44,17 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    // Ng4LoadingSpinnerModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
-    ModalModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        // Ng4LoadingSpinnerModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        TooltipModule.forRoot(),
+        ModalModule.forRoot(),
+        RouterModule.forRoot(appRoutes),
+        ReactiveFormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

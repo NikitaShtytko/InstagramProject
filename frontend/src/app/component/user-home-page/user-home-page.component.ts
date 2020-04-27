@@ -15,16 +15,20 @@ export class UserHomePageComponent implements OnInit {
   constructor(private userService: UserService, private postService: PostService) {}
   public user: User;
   public posts: Post[];
+  public vision = false;
 
   public subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
     this.getUserByLogin('VreDina');
-    console.log(this.user?.login);
+    console.log(' dasdas ' + this.user?.login);
+    this.getPostsByUserId(this.user.id);
   }
 
-  _UerPosts(): void {
+  _UserPosts(): void {
     this.getPostsByUserId(this.user.id);
+    this.vision = !this.vision;
+    console.log(this.vision);
   }
 
   public getUserByLogin(login: string): void{

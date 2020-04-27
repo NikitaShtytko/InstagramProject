@@ -32,8 +32,8 @@
     </table>
   </div>
 </div>
-  <button (click)="_UerPosts()">View posts</button>
-<div class="post-table">
+  <button id="user-posts" (click)="_UserPosts()">View posts</button>
+<div *ngIf="vision" class="post-table">
   <table class="table">
     <thead class="thead-dark">
     <tr>

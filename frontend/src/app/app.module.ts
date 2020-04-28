@@ -1,8 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
-import {TooltipModule} from 'ngx-bootstrap/tooltip';
-import {ModalModule} from 'ngx-bootstrap/modal';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
@@ -18,6 +15,10 @@ import {TagComponent} from './component/tag/tag.component';
 import {UserHomePageComponent} from './component/user-home-page/user-home-page.component';
 import {LoginComponent} from './component/login/login.component';
 import {RegisterComponent} from './component/register/register.component';
+import {SinglePostComponent} from './component/single-post/single-post.component';
+import {NewPostComponent} from './component/new-post/new-post.component';
+import {TestHeaderComponent} from './component/test-header/test-header.component';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 
 const appRoutes: Routes = [
   {path: 'home', component: UserComponent},
@@ -43,15 +44,16 @@ const appRoutes: Routes = [
     UserHomePageComponent,
     LoginComponent,
     RegisterComponent,
+    SinglePostComponent,
+    NewPostComponent,
+    TestHeaderComponent,
   ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
         // Ng4LoadingSpinnerModule.forRoot(),
-        BsDropdownModule.forRoot(),
-        TooltipModule.forRoot(),
-        ModalModule.forRoot(),
+        MDBBootstrapModule.forRoot(),
         RouterModule.forRoot(appRoutes),
         ReactiveFormsModule,
     ],

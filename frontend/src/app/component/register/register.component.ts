@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../moduls/user';
 import {UserService} from '../../service/user/user.service';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {tap} from 'rxjs/operators';
+import {AsyncValidatorFn, FormControl, FormGroup, Validators} from '@angular/forms';
+import {debounceTime, distinctUntilChanged, first, map, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -27,14 +27,16 @@ export class RegisterComponent implements OnInit {
 
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}')
+      Validators.pattern('[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}'
+      )], [
+      this.emailValidator()
       ]),
 
     login: new FormControl('', [
       Validators.required,
       Validators.pattern('^[a-zA-Zа-яА-Я\'_0-9]{4,40}$'
       )], [
-      this.loginValidator.bind(this)
+      this.loginValidator()
     ]),
 
     password: new FormControl('', [
@@ -59,7 +61,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
 
     this.confirmPass();
-    // this.saveUser(this.user);
   }
 
   register() {
@@ -73,7 +74,6 @@ export class RegisterComponent implements OnInit {
     console.log('register');
 
     this.saveUser(user);
-    // this.router.navigate(['/user-home-page'], {});
   }
 
   public saveUser(user: User): void{
@@ -81,22 +81,39 @@ export class RegisterComponent implements OnInit {
     console.log(user);
   }
 
-  private loginValidator(control: AbstractControl): Observable<ValidationErrors> {
-    return new Observable<ValidationErrors>(observer => {
-      control.markAsPending();
-      this.userService.getUserByLogin(control.value).pipe(
-        tap(res => {
-          console.log(res);
-          if (res.login != null) {
-            control.markAsPending({onlySelf: false});
-            control.setErrors({notUnique: true});
-          } else {
-            control.markAsPending({onlySelf: false});
-            this.login.setErrors(null);
-          }
-        })
-      ).subscribe();
-    });
+  private loginValidator(): AsyncValidatorFn {
+    return control => control.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((val: string) => this.userService.getUserByLogin(val)),
+        map((res: User) => (res != null ? {loginExist: true} : null)),
+        first()
+      );
+    console.log(this.user);
+  }
+
+  // private loginValidator(): AsyncValidatorFn {
+  //   return control => control.valueChanges
+  //     .pipe(
+  //       debounceTime(500),
+  //       distinctUntilChanged(),
+  //       switchMap((val: string) => this.userService.existUser(val)),
+  //       map((res: User) => (res != null ? {loginExist: true} : null)),
+  //       first()
+  //     );
+  //   console.log(this.user);
+  // }
+
+  private emailValidator(): AsyncValidatorFn {
+    return control => control.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((val: string) => this.userService.getUserByEmail(val)),
+        map((res: User) => (res != null ? {emailExist: true} : null)),
+        first()
+      );
   }
 
   private confirmPass() {
@@ -120,6 +137,10 @@ export class RegisterComponent implements OnInit {
 
   get login() {
     return this.form.get('login');
+  }
+
+  get email(){
+    return this.form.get('email');
   }
 
   public gender(name: string): void{

@@ -16,8 +16,8 @@ export class PostComponent implements OnInit {
   public subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    // this.getPosts();
-    this.getPostsByUserId(2);
+    this.getPosts();
+    // this.getPostsByUserId(2);
   }
 
   public getPosts(): void{

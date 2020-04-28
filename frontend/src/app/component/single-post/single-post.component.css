@@ -1,0 +1,56 @@
+/*.modal-body{*/
+/*  text-align: center;*/
+/*}*/
+
+.post-photo img{
+  height: 450px;
+  width: 450px;
+}
+
+.modal-dialog{
+  display: flex;
+}
+
+.post-photo{
+  flex: 1;
+}
+
+.post-info{
+  flex: 1;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.post-info h2{
+  text-align: center;
+  background-color: lightpink;
+}
+
+tr{
+  display: flex;
+}
+
+td{
+  flex: 1;
+}
+
+.comment-area{
+  text-align: center;
+  background-color: lightgray;
+  border-radius: 3px;
+}
+
+.comment-area tr{
+  background-color: lightblue;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+#comment-header{
+  background-color: lightpink;
+}
+
+#post-comments{
+  text-align: center;
+  margin-bottom: 10px;
+}

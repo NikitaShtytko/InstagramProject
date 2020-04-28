@@ -22,7 +22,7 @@ public class UserController {
         return (List<User>) userService.getAll();
     }
 
-    @RequestMapping(value="/id", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public User saveUser(@RequestBody User user){
         return userService.save(user);
     }
@@ -37,5 +37,14 @@ public class UserController {
         return userService.findByLogin(login);
     }
 
+    @RequestMapping(value = "/email/{email}", method = RequestMethod.GET)
+    public User getUserByEmail(@PathVariable(name = "email") String email) {
+        return userService.findByEmail(email);
+    }
 
+    @GetMapping("/login/exist/{login}")
+    public String ExistUser(@PathVariable String login) {
+        User user = userService.existUser(login);
+        return user.getLogin();
+    }
 }

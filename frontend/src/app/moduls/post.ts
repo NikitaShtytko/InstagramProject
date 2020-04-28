@@ -9,6 +9,7 @@ export class Post{
   photo: number;
   txt: string;
   date: string;
+  place: string;
   user: User;
   comment: Comments[];
   tags: Tag[];

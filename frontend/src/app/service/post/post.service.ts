@@ -17,4 +17,12 @@ export class PostService {
   getPostsByUserId(id): Observable<Post[]> {
     return this.httpClient.get<Post[]>('/api/posts/user/' + id);
   }
+
+  getPostById(id: number) {
+    return this.httpClient.get<Post>('/api/posts/' + id);
+  }
+
+  savePost(post: Post) {
+    return this.httpClient.post<Post>('/api/posts', post);
+  }
 }

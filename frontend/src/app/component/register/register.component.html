@@ -1,19 +1,17 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!--&lt;!&ndash;&#45;&#45;&#45;&#45; Include the above in your HEAD tag &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
+<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">-->
 
 <div class="container">
-
 
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
         <header class="card-header">
-          <a [routerLink]="['/login']" class="float-right btn btn-outline-primary mt-1">Log in</a>
+          <a [routerLink]="['/login']" class="float-right btn btn-outline-primary mt-1">Sign in</a>
           <h4 class="card-title mt-2">Sign up</h4>
         </header>
         <article class="card-body">
@@ -22,17 +20,17 @@
             <div class="form-group">
               <label>Login</label>
               <input type="text" class="form-control" placeholder="" formControlName="login">
-              <div class="red-text" *ngIf=" login.invalid && login.dirty && !login.errors?.notUnique">
+              <div class="red-text" *ngIf=" login.invalid && login.dirty && !login.errors?.loginExist">
                 Use only 4-40 Cyrillic or Latin characters, 0-9 digit, _ '
               </div>
-              <div class="red-text" *ngIf=" login.hasError('notUnique') && login.dirty">
+              <div class="red-text" *ngIf=" login.hasError('loginExist') && login.dirty">
                 User with this login already exists
               </div>
             </div> <!-- form-group end.// -->
 
             <div class="form-row">
               <div class="col form-group">
-                <label>First name </label>
+                <label>First name</label>
                 <input type="text" class="form-control" placeholder="" formControlName="firstName">
                 <div class="red-text"
                      *ngIf="form.controls['firstName'].invalid && form.controls['firstName'].dirty">
@@ -53,25 +51,27 @@
               <label>Email address</label>
               <input type="email" class="form-control" placeholder="" formControlName="email">
               <div class="red-text"
-                   *ngIf="form.controls['email'].invalid && form.controls['email'].dirty">
+                   *ngIf="email.invalid && email.dirty && !email.errors?.emailExist">
                 Please enter your email, using 2-40 Cyrillic or Latin characters
+              </div>
+              <div class="red-text" *ngIf=" email.hasError('emailExist') && email.dirty">
+                User with this email already exists
               </div>
               <small class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div> <!-- form-group end.// -->
 
-
-<!--            <div class="form-group">-->
-<!--              <label class="form-check form-check-inline">-->
-<!--                <input  (change)= "gender('MAN')"-->
-<!--                class="form-check-input" type="radio" name="gender" value="option1">-->
-<!--                <span class="form-check-label"> Male </span>-->
-<!--              </label>-->
-<!--              <label class="form-check form-check-inline">-->
-<!--                <input  (change)= "gender('WOMAN')"-->
-<!--                  class="form-check-input" type="radio" name="gender" value="option2">-->
-<!--                <span class="form-check-label">Female</span>-->
-<!--              </label>-->
-<!--            </div> &lt;!&ndash; form-group end.// &ndash;&gt;-->
+            <div class="form-group">
+              <label class="form-check form-check-inline">
+                <input  (change)= "gender('MAN')" checked
+                class="form-check-input" type="radio" name="gender" value="option1">
+                <span class="form-check-label"> Male </span>
+              </label>
+              <label class="form-check form-check-inline">
+                <input  (change)= "gender('WOMAN')"
+                  class="form-check-input" type="radio" name="gender" value="option2">
+                <span class="form-check-label">Female</span>
+              </label>
+            </div> <!-- form-group end.// -->
 
             <div class="form-group">
               <label for="formPassword">Password</label>
@@ -92,15 +92,14 @@
             </div>
 
             <div class="form-group">
-                <button class="btn btn-primary btn-block" [disabled]="form.invalid"
+                <button class="btn btn-primary btn-block" [disabled]="form.invalid || form.pending"
                         (click)="register()">Register
-                  <!-- || form.pending-->
                 </button>
               <small class="text-muted">By clicking the 'Register' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>
             </div> <!-- form-group// -->
           </form>
         </article> <!-- card-body end .// -->
-        <div class="border-top card-body text-center">Have an account? <a [routerLink]="['/login']">Log In</a></div>
+        <div class="border-top card-body text-center">Have an account? <a [routerLink]="['/login']">Sign In</a></div>
       </div> <!-- card.// -->
     </div> <!-- col.//-->
   </div> <!-- row.//-->

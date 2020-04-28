@@ -23,6 +23,19 @@ public class UserServiceImpl implements UserService {
         return restTemplate.getForObject(backendServerUrl + "/api/users/login/" + login, User.class);
     }
 
+    @Override
+    public User existUser(String login) {
+        RestTemplate restTemplate = new RestTemplate();
+        System.out.println(login + "get");
+        return restTemplate.getForObject(backendServerUrl + "/api/users/login/" + login, User.class);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/users/email/" + email, User.class);
+    }
+
 //    @Override
 //    public User findById(long id) {
 //        RestTemplate restTemplate = new RestTemplate();

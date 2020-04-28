@@ -21,6 +21,15 @@ export class UserService {
     return this.httpClient.get<User>('/api/users/login/' + login);
   }
 
+  getUserByEmail(email: string): Observable<User> {
+    return this.httpClient.get<User>('/api/users/email/' + email);
+  }
+
+  existUser(login: string): Observable<User> {
+    console.log(User);
+    return this.httpClient.get<User>('/api/users/login/exist/' + login);
+  }
+
   getUserById(id: number): Observable<User> {
     return this.httpClient.get<User>('/api/users/' + id);
   }

@@ -49,8 +49,8 @@
       </tr>
       </thead>
       <tbody class="thead-dark-child">
-      <tr *ngFor="let s of posts; let r = index ">
-        <td>{{s.id}}</td>
+      <tr *ngFor="let s of posts; let r = index;">
+        <td><a routerLink="post/{{s.id}}">{{s.id}}</a></td>
         <td>{{s.photo}}</td>
         <td>{{s.txt}}</td>
         <td>{{s.date}}</td>

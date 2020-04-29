@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {PostService} from '../../service/post/post.service';
 import {Post} from '../../moduls/post';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-single-post',
@@ -10,13 +11,24 @@ import {Post} from '../../moduls/post';
 })
 export class SinglePostComponent implements OnInit {
 
-  constructor(private postService: PostService){}
   public post: Post;
   public subscriptions: Subscription[] = [];
   public vision = false;
 
+  id: number;
+  // private subscription: Subscription;
+  // constructor(private postService: PostService, private activateRoute: ActivatedRoute){
+  //   this.subscription = activateRoute.params.subscribe(params => this.id = params.id);
+  //   console.log(this.id);
+  // }
+
+  constructor(private postService: PostService, private activateRoute: ActivatedRoute) {
+    this.id = activateRoute.snapshot.params.id;
+  }
+
   ngOnInit(): void {
-    this.getPostById(1);
+    console.log(this.id);
+    this.getPostById(this.id);
   }
 
   public getPostById(id: number): void{

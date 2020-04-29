@@ -16,21 +16,24 @@ import {UserHomePageComponent} from './component/user-home-page/user-home-page.c
 import {LoginComponent} from './component/login/login.component';
 import {RegisterComponent} from './component/register/register.component';
 import {SinglePostComponent} from './component/single-post/single-post.component';
-import {NewPostComponent} from './component/new-post/new-post.component';
 import {TestHeaderComponent} from './component/test-header/test-header.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 
 const appRoutes: Routes = [
-  {path: 'home', component: UserComponent},
+  {path: '#', component: UserComponent},
   {path: 'ban', component: BanComponent},
   {path: 'comments', component: CommentsComponent},
-  {path: 'post', component: PostComponent},
+  {path: 'posts', component: PostComponent},
   {path: 'tag', component: TagComponent},
   {path: 'user', component: UserComponent},
-  {path: 'user-home-page', component: UserHomePageComponent},
+  {path: 'home', component: UserHomePageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'home/post/:id', component: SinglePostComponent},
+  {path: 'posts/post/:id', component: SinglePostComponent},
 ];
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +48,6 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     SinglePostComponent,
-    NewPostComponent,
     TestHeaderComponent,
   ],
     imports: [

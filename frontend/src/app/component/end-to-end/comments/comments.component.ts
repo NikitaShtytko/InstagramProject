@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Comments} from '../../moduls/comments';
-import {CommentsService} from '../../service/comments/comments.service';
+import {Comments} from '../../../moduls/comments';
+import {CommentsService} from '../../../service/comments/comments.service';
 import {Subscription} from 'rxjs';
 
 @Component({

@@ -44,9 +44,8 @@ export class UserHomePageComponent implements OnInit {
   }
 
   _UserPosts(): void {
-    // this.getPostsByUserId(this.user.id);
+    this.getPostsByUserId(this.user.id);
     this.vision = !this.vision;
-    console.log(this.vision);
   }
 
   public getUserByLogin(login: string): void {
@@ -59,7 +58,6 @@ export class UserHomePageComponent implements OnInit {
   public getPostsByUserId(id: number): void {
     this.subscriptions.push(this.postService.getPostsByUserId(id).subscribe(response => {
       this.posts = response;
-      console.log(response);
     }));
   }
 
@@ -78,11 +76,17 @@ export class UserHomePageComponent implements OnInit {
     providerData.append('photo', this.selectedPhoto);
 
     this.savePost(post);
+    this.form.reset();
     this.getPostsByUserId(this.user.id);
   }
 
 
+
   private savePost(post: Post) {
     this.subscriptions.push(this.postService.savePost(post).subscribe(response => {this.post = response; console.log(response); }));
+  }
+
+  _modalReset(){
+    this.form.reset();
   }
 }

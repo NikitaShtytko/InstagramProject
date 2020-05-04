@@ -35,20 +35,17 @@ public class UserController {
 //    @RequestMapping(value = "/login/exist/{login}", method = RequestMethod.GET)
 //    public String UserExistUserByLogin(@PathVariable(name = "login") String login) {
 //        User user = userService.findByLogin(login);
-//        System.out.println("here");
 //        return user.getLogin();
 //    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable(name = "id") Long id) {
         Optional<User> user = userService.getById(id);
-        System.out.println("");
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<User> getAllUsers() {
-        System.out.println("");
         return userService.getAll();
     }
 

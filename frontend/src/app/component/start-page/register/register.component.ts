@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../moduls/user';
-import {UserService} from '../../service/user/user.service';
+import {User} from '../../../moduls/user';
+import {UserService} from '../../../service/user/user.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {AsyncValidatorFn, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -78,19 +78,6 @@ export class RegisterComponent implements OnInit {
 
   public saveUser(user: User): void{
     this.subscriptions.push(this.userService.saveUser(user).subscribe(response => {this.user = response; console.log(response); }));
-    console.log(user);
-  }
-
-  private loginValidator(): AsyncValidatorFn {
-    return control => control.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        switchMap((val: string) => this.userService.getUserByLogin(val)),
-        map((res: User) => (res != null ? {loginExist: true} : null)),
-        first()
-      );
-    console.log(this.user);
   }
 
   // private loginValidator(): AsyncValidatorFn {
@@ -98,19 +85,30 @@ export class RegisterComponent implements OnInit {
   //     .pipe(
   //       debounceTime(500),
   //       distinctUntilChanged(),
-  //       switchMap((val: string) => this.userService.existUser(val)),
+  //       switchMap((val: string) => this.userService.getUserByLogin(val)),
   //       map((res: User) => (res != null ? {loginExist: true} : null)),
   //       first()
   //     );
   //   console.log(this.user);
   // }
 
+  private loginValidator(): AsyncValidatorFn {
+    return control => control.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap((val: string) => this.userService.existUser(val)),
+        map((res: User) => (res != null ? {loginExist: true} : null)),
+        first()
+      );
+  }
+
   private emailValidator(): AsyncValidatorFn {
     return control => control.valueChanges
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((val: string) => this.userService.getUserByEmail(val)),
+        switchMap((val: string) => this.userService.existEmail(val)),
         map((res: User) => (res != null ? {emailExist: true} : null)),
         first()
       );

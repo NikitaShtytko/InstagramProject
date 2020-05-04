@@ -15,7 +15,6 @@ public class CommentController {
 
     @RequestMapping
     public ResponseEntity<Iterable<Comment>> getAllComments(){
-        System.out.println("Govno");
         return ResponseEntity.ok(commentService.getAll());
     }
 

@@ -29,7 +29,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(Post post) {
-        System.out.println("SAVE POST DETECTED");
 //        sessionFactory.getCurrentSession().update(post.getLikes());
         return postRepository.save(post);
     }

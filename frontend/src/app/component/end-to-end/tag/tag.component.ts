@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {Tag} from '../../moduls/tag';
-import {TagService} from '../../service/tag/tag.service';
+import {Tag} from '../../../moduls/tag';
+import {TagService} from '../../../service/tag/tag.service';
 
 @Component({
   selector: 'app-tag',

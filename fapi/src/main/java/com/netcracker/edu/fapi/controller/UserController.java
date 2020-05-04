@@ -18,7 +18,6 @@ public class UserController {
     //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<User> getAllUsers(){
-        System.out.println("");
         return (List<User>) userService.getAll();
     }
 
@@ -43,8 +42,14 @@ public class UserController {
     }
 
     @GetMapping("/login/exist/{login}")
-    public String ExistUser(@PathVariable String login) {
-        User user = userService.existUser(login);
-        return user.getLogin();
+    public Boolean ExistUser(@PathVariable String login) {
+        Boolean user = userService.existUser(login);
+        return user;
+    }
+
+    @GetMapping("/email/exist/{email}")
+    public Boolean ExistEmail(@PathVariable String email) {
+        Boolean userEmail = userService.existEmail(email);
+        return userEmail;
     }
 }

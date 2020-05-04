@@ -42,6 +42,7 @@
         <th scope="col">Photo</th>
         <th scope="col">Text</th>
         <th scope="col">Date</th>
+        <th scope="col">Place</th>
         <th scope="col">Comment</th>
         <th scope="col">Tag</th>
         <th scope="col">Like</th>
@@ -54,6 +55,7 @@
         <td>{{s.photo}}</td>
         <td>{{s.txt}}</td>
         <td>{{s.date}}</td>
+        <td>{{s.place}}</td>
         <td>{{s.comment?.length}}</td>
         <td>{{s.tags?.length}}</td>
         <td>{{s.likes?.length}}</td>
@@ -70,7 +72,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide(); _modalReset()">
           <span aria-hidden="true">×</span>
         </button>
         <h4 class="modal-title w-100" id="myModalLabel">New Post</h4>
@@ -101,9 +103,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                (click)="basicModal.hide()" mdbWavesEffect>Close
+                (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
         </button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="_onSave()">
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide(); _onSave()">
           Post
         </button>
       </div>

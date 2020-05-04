@@ -1,12 +1,10 @@
-<div class="modal-body" id="modalPostInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="body">
+  <div class="in-body">
+  <div class="shell">
     <div class="post-photo">
       <img src="https://s1.1zoom.ru/b5350/233/Painting_Art_Sunrises_and_sunsets_Mountains_Deer_529666_3840x2400.jpg">
     </div>
     <div class="post-info">
-      <h2>{{post.id}}</h2>
-      <br>
       <h2>{{post.user.login}}</h2>
       <br>
       <h6>Description:</h6>
@@ -24,7 +22,7 @@
       </tr>
     </div>
   </div>
-  <button id="post-comments" (click)="_postComments()">Show Comments</button>
+  <button mdbBtn color="primary" id="post-comments" (click)="_postComments()">Show Comments</button>
 
   <div *ngIf="vision" class="comment-area">
     <h4>Comments:</h4>
@@ -36,6 +34,7 @@
       <td>{{s.user.login}}</td>
       <td>{{s.txt}}</td>
     </tr>
+  </div>
   </div>
 </div>
 

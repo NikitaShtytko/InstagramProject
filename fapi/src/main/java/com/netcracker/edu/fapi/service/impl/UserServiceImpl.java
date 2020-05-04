@@ -24,10 +24,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User existUser(String login) {
+    public Boolean existUser(String login) {
         RestTemplate restTemplate = new RestTemplate();
-        System.out.println(login + "get");
-        return restTemplate.getForObject(backendServerUrl + "/api/users/login/" + login, User.class);
+//        restTemplate.getForObject(backendServerUrl + "/api/users/login/" + login, User.class);
+        if (restTemplate.getForObject(backendServerUrl + "/api/users/login/" + login, User.class) != null)
+            return true;
+        else
+            return null;
+    }
+
+    @Override
+    public Boolean existEmail(String email) {
+        RestTemplate restTemplate = new RestTemplate();
+        if (restTemplate.getForObject(backendServerUrl + "/api/users/email/" + email, User.class) != null)
+            return true;
+        else
+            return null;
     }
 
     @Override
@@ -39,7 +51,6 @@ public class UserServiceImpl implements UserService {
 //    @Override
 //    public User findById(long id) {
 //        RestTemplate restTemplate = new RestTemplate();
-//        System.out.println("");
 //        return restTemplate.getForObject(backendServerUrl + "/api/users/" + id, User.class);
 //    }
 
@@ -47,7 +58,6 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         RestTemplate restTemplate = new RestTemplate();
         User[] usersResponse = restTemplate.getForObject(backendServerUrl + "/api/users/", User[].class);
-        System.out.println("");
         return usersResponse == null ? Collections.emptyList() : Arrays.asList(usersResponse);
     }
 

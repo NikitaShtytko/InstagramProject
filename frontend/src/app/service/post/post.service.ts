@@ -25,4 +25,8 @@ export class PostService {
   savePost(post: Post) {
     return this.httpClient.post<Post>('/api/posts', post);
   }
+
+  createPost(formData: FormData): Observable<any> {
+    return this.httpClient.post('/api/posts', formData);
+  }
 }

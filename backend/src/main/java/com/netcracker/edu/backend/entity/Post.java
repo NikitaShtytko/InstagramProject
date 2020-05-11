@@ -16,7 +16,7 @@ public class Post {
     @Column(name = "post_id")
     private Long id;
 
-    private Long photo;
+    private String photo;
 
     private String txt;
 

@@ -1,9 +1,9 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo">
 
   <!-- Navbar brand -->
   <mdb-navbar-brand>
-    <a class="navbar-brand" [routerLink]="['/home']">Home</a>
+    <a id="home-link" mdbBtn color="primary" class="navbar-brand" [routerLink]="['/home']">Home</a>
   </mdb-navbar-brand>
 
   <!-- Collapsible content -->
@@ -12,10 +12,15 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect
+        <a id="new-post-button" mdbBtn color="primary" class="nav-link waves-light" mdbWavesEffect
            [routerLink]="['/posts']">News
           <span class="sr-only">(current)</span>
         </a>
+      </li>
+      <li>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
+                mdbWavesEffect>New Post
+        </button>
       </li>
 <!--      <li class="nav-item">-->
 <!--        <a class="nav-link waves-light" mdbWavesEffect-->
@@ -36,7 +41,7 @@
       <div class="md-form my-0">
         <ul class="navbar-nav mr-right">
           <li class="nav-item active">
-            <a class="nav-link waves-light" mdbWavesEffect
+            <a mdbBtn color="primary" class="nav-link waves-light" mdbWavesEffect
                [routerLink]="['/register']">Sign Up / Sign In</a>
           </li>
         </ul>
@@ -67,6 +72,55 @@
 
   <!-- Collapsible content -->
   </links>
-
 </mdb-navbar>
+
+
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide(); _modalReset()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">New Post</h4>
+      </div>
+      <div [formGroup]="form">
+
+        <!--        <div class="custom-file mb-3">-->
+        <!--          <input type="file" class="custom-file-input" id="photo" (change)="onFileSelected($event)"-->
+        <!--                 accept="image/jpeg,image/png" placeholder="">-->
+        <!--        </div>-->
+
+        <!--        <label class="custom-file-label" for="photo">Select a photo in png or jpg format</label>-->
+
+        <div class="form-group">
+          <label for="photo"><strong>Choose Photo</strong></label>
+          <input type="file" class="form-control-file" id="photo">
+
+          <label for="Description"><strong>Description</strong></label>
+
+          <!--          <label>First name</label>-->
+          <!--          <input type="text" class="form-control" placeholder="" formControlName="firstName">-->
+          <textarea class="form-control" name="Description" id="Description" cols="30" rows="10"
+                    formControlName="description"></textarea>
+
+          <label for="Place"><strong>Place</strong></label>
+          <textarea class="form-control" name="Place" id="Place" cols="30" rows="2" formControlName="place"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
+        </button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide(); _onSave()">
+          Post
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 <!--/.Navbar-->

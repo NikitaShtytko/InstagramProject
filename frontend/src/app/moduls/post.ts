@@ -6,12 +6,15 @@ import {Like} from './like';
 export class Post{
 
   id: number;
-  photo: number;
+  photo: string;
   txt: string;
-  date: string;
+  date: Date;
   place: string;
   user: User;
   comment: Comments[];
   tags: Tag[];
   likes: Like[];
+
+  constructor() {
+  }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -31,6 +32,8 @@ public class PostServiceImpl implements PostService{
     @Override
     public Post save(Post entity) {
         RestTemplate restTemplate = new RestTemplate();
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        entity.setDate(time);
         return restTemplate.postForEntity(backendServerUrl + "/api/posts/", entity, Post.class).getBody();
     }
 

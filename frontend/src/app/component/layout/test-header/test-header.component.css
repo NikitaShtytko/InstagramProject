@@ -1,0 +1,27 @@
+#new-post-button{
+  width: 100px;
+}
+
+.form-group{
+  margin-top: 1%;
+  text-align: center;
+}
+
+textarea{
+  margin-top: 1%;
+  margin-left: 10%;
+  width: 80%;
+}
+
+.form-group label{
+  margin-top: 3%;
+}
+
+input{
+  margin-left: 30%;
+  width: 50%;
+}
+
+#home-link{
+  font-weight: bold;
+}

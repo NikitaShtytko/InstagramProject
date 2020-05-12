@@ -2,7 +2,7 @@
   <div class="in-body">
   <div class="shell">
     <div class="post-photo">
-      <img src="https://s1.1zoom.ru/b5350/233/Painting_Art_Sunrises_and_sunsets_Mountains_Deer_529666_3840x2400.jpg">
+      <img *ngIf="post && post.photo" src="data:image/jpg;base64,{{post?.photo}}">
     </div>
     <div class="post-info">
       <h2>{{post.user.login}}</h2>
@@ -11,7 +11,7 @@
       <h4>{{post.txt}}</h4>
       <br>
       <h6>Date:</h6>
-      <h4>{{post.date}}</h4>
+      <h4>{{post.date | date: 'dd/MM/yy HH:mm:ss'}}</h4>
       <br>
       <h5>Place: </h5>
       <h4>{{post.place}}</h4>

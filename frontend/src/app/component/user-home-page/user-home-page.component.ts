@@ -4,7 +4,8 @@ import {User} from '../../moduls/user';
 import {Subscription} from 'rxjs';
 import {Post} from '../../moduls/post';
 import {PostService} from '../../service/post/post.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 const currentTimeZoneOffsetInHours = new Date().getTimezoneOffset() / 60;
 
@@ -16,7 +17,11 @@ const currentTimeZoneOffsetInHours = new Date().getTimezoneOffset() / 60;
 
 export class UserHomePageComponent implements OnInit {
 
-  constructor(private userService: UserService, private postService: PostService) {
+  login: string;
+
+  constructor(private userService: UserService, private postService: PostService,
+              private activateRoute: ActivatedRoute) {
+    this.login = activateRoute.snapshot.params.login;
   }
 
   public user: User;
@@ -30,12 +35,24 @@ export class UserHomePageComponent implements OnInit {
     place: new FormControl('', [])
   });
 
+  info: FormGroup = new FormGroup(({
+    firstName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Zа-яА-Я\']{2,40}$')
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Zа-яА-Я\']{2,40}$')
+    ]),
+  }));
+
   public subscriptions: Subscription[] = [];
   private myImage: any;
 
   ngOnInit(): void {
     // this.getUserByLogin('VreDina');
-    this.subscriptions.push(this.userService.getUserByLogin('VreDina').subscribe(response => {
+    // this.subscriptions.push(this.userService.getUserByLogin('VreDina').subscribe(response => {
+    this.subscriptions.push(this.userService.getUserByLogin(this.login).subscribe(response => {
       this.user = response;
       console.log(response);
       this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(result => {
@@ -55,7 +72,7 @@ export class UserHomePageComponent implements OnInit {
     this.vision = !this.vision;
   }
 
-  _onSave(){
+  _postSave(){
     const postData = new FormData();
     const post = new Post();
 
@@ -82,6 +99,7 @@ export class UserHomePageComponent implements OnInit {
 
   _modalReset(){
     this.form.reset();
+    this.info.reset();
   }
 
   public getUserByLogin(login: string): void {
@@ -97,12 +115,41 @@ export class UserHomePageComponent implements OnInit {
     }));
   }
 
-  // converter(photo: string){
-  //   console.log(photo);
-  //   if (photo !== ''){
-  //   this.myImage.src = URL.createObjectURL(photo);
-  //   photo = this.myImage;
-  //   console.log(photo);
+  _editSave() {
+    const providerData = new FormData();
+
+    if (this.selectedPhoto != null) {
+          providerData.append('photo', this.selectedPhoto);
+        }
+
+    this.user.firstName = this.info.controls.firstName.value;
+    this.user.lastName = this.info.controls.lastName.value;
+    console.log(this.user);
+
+    providerData.append('user', JSON.stringify(this.user));
+
+    this.subscriptions.push(this.userService.updateInfo(providerData).subscribe(response => {
+      this.user = response;
+      this.form.reset();
+    }));
+  }
+
+  // updateProvider() {
+  //   const providerData = new FormData();
+  //   if (this.selectedPhoto != null) {
+  //     providerData.append("photo", this.selectedPhoto);
   //   }
-  //   }
+  //
+  //   this.provider.name = this.providerForm.get('name').value;
+  //   this.provider.price = this.providerForm.get('price').value;
+  //   this.provider.description = this.providerForm.get('description').value;
+  //
+  //   providerData.append("provider", JSON.stringify(this.provider));
+  //
+  //   this.providerService.updateProvider(providerData).subscribe(res => this.mdbModalRef.hide());
+  // }
+  _defaultValue() {
+    this.info.controls.firstName.setValue(this.user.firstName);
+    this.info.controls.lastName.setValue(this.user.lastName);
+  }
 }

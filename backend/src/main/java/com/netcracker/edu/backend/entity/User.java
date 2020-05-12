@@ -39,6 +39,9 @@ public class User {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "photo")
+    private String photo;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private List<Ban> ban;

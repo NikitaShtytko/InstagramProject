@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 //@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum UserGender{
-    MEN("MAN"),
+    MAN("MAN"),
     WOMEN("WOMEN");
 
     UserGender(String name) {

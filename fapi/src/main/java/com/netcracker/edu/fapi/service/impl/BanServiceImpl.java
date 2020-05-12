@@ -36,6 +36,11 @@ public class BanServiceImpl implements BanService {
     }
 
     @Override
+    public Ban update(Ban entity) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendServerUrl + "/api/bans/", id);

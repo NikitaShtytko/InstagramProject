@@ -34,6 +34,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post update(Post entity) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         postRepository.deleteById(id); }
 

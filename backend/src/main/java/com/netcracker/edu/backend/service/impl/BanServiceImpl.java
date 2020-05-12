@@ -36,4 +36,9 @@ public class BanServiceImpl implements BanService {
     public Ban save(Ban ban) {
         return banRepository.save(ban);
     }
+
+    @Override
+    public Ban update(Ban entity) {
+        return null;
+    }
 }

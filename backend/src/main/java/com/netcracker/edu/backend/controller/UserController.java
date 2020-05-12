@@ -2,12 +2,14 @@ package com.netcracker.edu.backend.controller;
 
 import com.netcracker.edu.backend.entity.User;
 import com.netcracker.edu.backend.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Log4j2
 @CrossOrigin
 @RestController
 @RequestMapping("/api/users")
@@ -32,11 +34,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-//    @RequestMapping(value = "/login/exist/{login}", method = RequestMethod.GET)
-//    public String UserExistUserByLogin(@PathVariable(name = "login") String login) {
-//        User user = userService.findByLogin(login);
-//        return user.getLogin();
-//    }
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        user = userService.update(user);
+        return ResponseEntity.ok(user);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable(name = "id") Long id) {

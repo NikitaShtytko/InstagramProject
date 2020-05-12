@@ -10,5 +10,6 @@ export class User {
   role: string;
   gender: string;
   status: string;
+  photo: string;
   ban: Ban[];
 }

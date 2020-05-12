@@ -6,5 +6,6 @@ public interface DefaultService<T> {
     Optional<T> getById(Long id);
     Iterable<T> getAll();
     T save(T entity);
+    T update(T entity);
     void delete(Long id);
 }

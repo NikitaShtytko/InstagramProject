@@ -34,6 +34,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public Tag update(Tag entity) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         tagRepository.deleteById(id);
     }

@@ -16,11 +16,6 @@ export class SinglePostComponent implements OnInit {
   public vision = false;
 
   id: number;
-  // private subscription: Subscription;
-  // constructor(private postService: PostService, private activateRoute: ActivatedRoute){
-  //   this.subscription = activateRoute.params.subscribe(params => this.id = params.id);
-  //   console.log(this.id);
-  // }
 
   constructor(private postService: PostService, private activateRoute: ActivatedRoute) {
     this.id = activateRoute.snapshot.params.id;

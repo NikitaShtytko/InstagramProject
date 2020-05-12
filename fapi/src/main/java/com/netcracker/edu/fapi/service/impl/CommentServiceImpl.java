@@ -36,6 +36,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Comment update(Comment entity) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendServerUrl + "api/comments/" + id);

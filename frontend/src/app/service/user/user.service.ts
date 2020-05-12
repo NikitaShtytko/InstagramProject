@@ -45,6 +45,11 @@ export class UserService {
     return this.httpClient.put<User>('/api/users/', user);
   }
 
+  updateInfo(formData: FormData): Observable<any> {
+    console.log('PUT');
+    return this.httpClient.put('/api/users/', formData);
+  }
+
   deleteUser(id: number): Observable<User> {
     return this.httpClient.delete<User>('/api/users/' + id);
   }

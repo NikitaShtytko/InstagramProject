@@ -28,10 +28,12 @@ const appRoutes: Routes = [
   {path: 'tag', component: TagComponent},
   {path: 'user', component: UserComponent},
   {path: 'home', component: UserHomePageComponent},
+  {path: 'home/:login', component: UserHomePageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home/post/:id', component: SinglePostComponent},
   {path: 'posts/post/:id', component: SinglePostComponent},
+  {path: 'home/:login/post/:id', component: SinglePostComponent},
   {path: '**', component: NotFoundComponent},
 ];
 

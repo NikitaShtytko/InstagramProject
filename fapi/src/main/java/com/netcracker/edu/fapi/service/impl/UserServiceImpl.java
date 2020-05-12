@@ -67,6 +67,13 @@ public class UserServiceImpl implements UserService {
         return restTemplate.postForEntity(backendServerUrl + "/api/users/", user, User.class).getBody();
     }
 
+    @Override
+    public User update(User user) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(backendServerUrl + "api/users/", user);
+        return findByLogin(user.getLogin());
+    }
+
 
 //    @Override
 //    public User loadUserByUsername(String username) throws UsernameNotFoundException {

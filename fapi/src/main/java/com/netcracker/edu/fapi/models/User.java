@@ -18,4 +18,5 @@ public class User {
     private UserGender gender;
     private String status;
     private List<Ban> ban;
+    private String photo;
 }

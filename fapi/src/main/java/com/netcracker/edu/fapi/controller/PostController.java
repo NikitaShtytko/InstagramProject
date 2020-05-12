@@ -47,21 +47,6 @@ public class PostController {
         return null;
     }
 
-//    @PostMapping
-//    public ResponseEntity<Post> create(@RequestParam(value = "photo", required = false) MultipartFile photo,
-//                                              @RequestParam("post") String post) throws IOException {
-//
-//        post = post.replace("\"photo\":{},", "");
-//        Post postMain = new ObjectMapper().readValue(post, Post.class);
-//        if (photo != null) {
-//            postMain.setPhoto(Converter.convertByteArrayToBase64(photo.getBytes()));
-//        }
-//        postMain = postService.create(dto);
-//        if (postMain != null) {
-//            return new ResponseEntity<>(dto, HttpStatus.CREATED);
-//        }
-//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePost(@PathVariable String id) {

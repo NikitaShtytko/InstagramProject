@@ -1,7 +1,7 @@
 <div class="body">
   <div class="user-info">
     <div class="left-column">
-      <img id="user-photo" src="http://s1.iconbird.com/ico/2013/12/505/w450h4001385925286User.png">
+      <img id="user-photo" *ngIf="user && user.photo" src="data:image/jpg;base64,{{user?.photo}}">
     </div>
     <div class="right-column">
       <table>
@@ -33,6 +33,12 @@
     <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
             mdbWavesEffect>New Post
     </button>
+    <button type="button" mdbBtn color="primary" class="relative waves-light"
+            (click)="editProfile.show(); _defaultValue()" mdbWavesEffect>Edit Profile
+    </button>
+<!--    <a routerLink="edit/{{user.id}}">-->
+<!--      <button mdbBtn color="primary">Edit Profile</button>-->
+<!--    </a>-->
   </div>
   <div *ngIf="vision" class="post-table">
     <table class="table">
@@ -79,14 +85,6 @@
       </div>
       <div [formGroup]="form">
 
-<!--        <div class="custom-file mb-3">-->
-<!--          <input type="file" class="custom-file-input" id="photo" (change)="onFileSelected($event)"-->
-<!--                 accept="image/jpeg,image/png" placeholder="">-->
-
-<!--        </div>-->
-
-<!--        <label class="custom-file-label" for="photo">Select a photo in png or jpg format</label>-->
-
         <div class="form-group">
           <label for="photo"><strong>Choose Photo</strong></label>
           <input type="file" class="form-control-file" id="photo"
@@ -106,7 +104,7 @@
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                 (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
         </button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide(); _onSave()">
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide(); _postSave()">
           Post
         </button>
       </div>
@@ -115,6 +113,58 @@
   </div>
 </div>
 
+<div mdbModal #editProfile="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="editProfile.hide(); _modalReset()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Edit Profile</h4>
+      </div>
+      <div [formGroup]="info">
+
+
+        <div class="form-group">
+
+          <label for="photo"><strong>Choose Photo</strong></label>
+          <input type="file" class="form-control-file" id="photo"
+                 (change)="onFileSelected($event)" accept="image/jpeg,image/png">
+
+          <label for="Description"><strong>First Name</strong></label>
+          <!--          <label>First name</label>-->
+          <!--          <input type="text" class="form-control" placeholder="" formControlName="firstName">-->
+          <input class="form-control" name="firstName" id="firstName"
+                    formControlName="firstName">
+          <div class="red-text"
+               *ngIf="info.controls['firstName'].invalid && info.controls['firstName'].dirty">
+            Please enter your name, using 2-40 Cyrillic or Latin characters
+          </div>
+
+          <label for="Place"><strong>Last Name</strong></label>
+          <input class="form-control" name="lastName" id="lastName" formControlName="lastName">
+          <div class="red-text"
+               *ngIf="info.controls['lastName'].invalid && info.controls['lastName'].dirty">
+            Please enter your name, using 2-40 Cyrillic or Latin characters
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="editProfile.hide(); _modalReset()" mdbWavesEffect>Close
+        </button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                [disabled]="info.invalid" (click)="editProfile.hide(); _editSave()">
+          Save
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 <!--<app-new-post></app-new-post>-->
 
 <!--<app-single-post></app-single-post>-->

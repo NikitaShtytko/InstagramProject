@@ -28,6 +28,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Comment update(Comment entity) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         commentRepository.deleteById(id);
     }

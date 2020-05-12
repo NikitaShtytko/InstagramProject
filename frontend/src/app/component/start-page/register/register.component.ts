@@ -59,21 +59,24 @@ export class RegisterComponent implements OnInit {
   public user: User = new User();
 
   ngOnInit(): void {
-
     this.confirmPass();
+    this.user.gender = 'MAN';
   }
 
   register() {
-    const user = new User();
-    user.login = this.form.controls.login.value;
-    user.firstName = this.form.controls.firstName.value;
-    user.lastName = this.form.controls.lastName.value;
-    user.password = this.form.controls.password.value;
-    user.email = this.form.controls.email.value;
+    this.user.login = this.form.controls.login.value;
+    this.user.firstName = this.form.controls.firstName.value;
+    this.user.lastName = this.form.controls.lastName.value;
+    this.user.password = this.form.controls.password.value;
+    this.user.email = this.form.controls.email.value;
 
     console.log('register');
 
-    this.saveUser(user);
+    console.log(this.user);
+    this.subscriptions.push(this.userService.saveUser(this.user).subscribe(response =>
+    {this.user = response; console.log(response);
+     this.router.navigate(['/home/' + this.user.login]);
+    }));
   }
 
   public saveUser(user: User): void{
@@ -143,6 +146,7 @@ export class RegisterComponent implements OnInit {
 
   public gender(name: string): void{
     this.user.gender = name;
+    console.log(this.user.gender);
   }
 
 

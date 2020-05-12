@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
         if (user.getStatus() == null) user.setStatus("0");
         return userRepository.save(user);
     }
+
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
+    }
 }

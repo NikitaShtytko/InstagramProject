@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 //@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum UserRole{
-    admin("admin"),
-    user("user");
+    admin("ADMIN"),
+    user("USER");
 
     UserRole(String name) {
         this.name = name;

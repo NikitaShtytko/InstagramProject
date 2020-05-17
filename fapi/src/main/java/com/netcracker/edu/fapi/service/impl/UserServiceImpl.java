@@ -1,8 +1,14 @@
 package com.netcracker.edu.fapi.service.impl;
 
 import com.netcracker.edu.fapi.models.User;
+import com.netcracker.edu.fapi.security.JwtUserFactory;
 import com.netcracker.edu.fapi.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,12 +16,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("customUserService")
+public class UserServiceImpl implements UserService, UserDetailsService{
 
     @Value("${backend.server.url}")
     private String backendServerUrl;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User findByLogin(String login) {
@@ -64,6 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         RestTemplate restTemplate = new RestTemplate();
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return restTemplate.postForEntity(backendServerUrl + "/api/users/", user, User.class).getBody();
     }
 
@@ -100,5 +109,14 @@ public class UserServiceImpl implements UserService {
     public User getById(Long id) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(backendServerUrl + "/api/users/" + id, User.class);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User user = findByLogin(s);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return JwtUserFactory.create(user);
     }
 }

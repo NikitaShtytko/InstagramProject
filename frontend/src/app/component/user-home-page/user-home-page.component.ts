@@ -51,7 +51,7 @@ export class UserHomePageComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getUserByLogin('VreDina');
-    // this.subscriptions.push(this.userService.getUserByLogin('VreDina').subscribe(response => {
+    // this.subscriptions.push(this.userService.getUserByLogin('test').subscribe(response => {
     this.subscriptions.push(this.userService.getUserByLogin(this.login).subscribe(response => {
       this.user = response;
       console.log(response);
@@ -75,10 +75,14 @@ export class UserHomePageComponent implements OnInit {
   _postSave(){
     const postData = new FormData();
     const post = new Post();
+    const user = this.user;
 
     post.txt = this.form.controls.description.value;
     post.place = this.form.controls.place.value;
+
+    this.user.photo = null;
     post.user = this.user;
+    this.user = user;
 
     postData.append('photo', this.selectedPhoto);
     postData.append('post', JSON.stringify(post));
@@ -89,7 +93,7 @@ export class UserHomePageComponent implements OnInit {
     this.postService.createPost(postData).subscribe(res => console.log(res));
 
     this.form.reset();
-    this.getPostsByUserId(this.user.id);
+    this.ngOnInit();
   }
 
   private savePost(post: Post) {

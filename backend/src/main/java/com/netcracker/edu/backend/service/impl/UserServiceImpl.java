@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+//    @Override
+//    public User findById(long id) {
+//        return userRepository.findById(id);
+//    }
+
     @Override
     public Iterable<User> getAll() {
         return userRepository.findAll();
@@ -46,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        if (user.getRole() == null) user.setRole("user");
+        if (user.getRole() == null) user.setRole("USER");
         if (user.getStatus() == null) user.setStatus("0");
         return userRepository.save(user);
     }

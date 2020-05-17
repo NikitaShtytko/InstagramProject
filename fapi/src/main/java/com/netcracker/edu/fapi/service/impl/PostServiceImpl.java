@@ -39,7 +39,11 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public Post update(Post entity) {
-        return null;
+        RestTemplate restTemplate = new RestTemplate();
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        entity.setDate(time);
+        restTemplate.put(backendServerUrl + "/api/posts/", entity);
+        return getById(entity.getId());
     }
 
     @Override

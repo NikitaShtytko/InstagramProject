@@ -21,7 +21,7 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {NotFoundComponent} from './component/layout/not-found/not-found.component';
 
 const appRoutes: Routes = [
-  {path: '#', component: UserComponent},
+  {path: '#', component: PostComponent},
   {path: 'ban', component: BanComponent},
   {path: 'comments', component: CommentsComponent},
   {path: 'posts', component: PostComponent},

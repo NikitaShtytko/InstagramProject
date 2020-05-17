@@ -13,4 +13,8 @@ export class CommentsService {
   getComments(): Observable<Comments[]> {
     return this.httpClient.get<Comments[]>('/api/comments');
   }
+
+  saveComment(comment: Comments) {
+    return this.httpClient.post<Comments>('/api/comments/', comment);
+  }
 }

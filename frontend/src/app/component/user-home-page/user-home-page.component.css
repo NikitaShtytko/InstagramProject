@@ -52,13 +52,12 @@ td{
 .buttons{
   display: flex;
   margin-top: 10px;
-  width: 100%;
+  width: 500px;
 
 }
 
 .buttons button{
   flex: 1;
-  margin-top: 25%;
   font-weight: bold;
 }
 

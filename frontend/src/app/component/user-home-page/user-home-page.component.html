@@ -26,20 +26,21 @@
           <td>{{user?.gender}}</td>
         </tr>
       </table>
+      <div class="buttons">
+        <button mdbBtn color="primary" id="user-posts" (click)="_UserPosts()">View posts</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
+                mdbWavesEffect>New Post
+        </button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light"
+                (click)="editProfile.show(); _defaultValue()" mdbWavesEffect>Edit Profile
+        </button>
+        <!--    <a routerLink="edit/{{user.id}}">-->
+        <!--      <button mdbBtn color="primary">Edit Profile</button>-->
+        <!--    </a>-->
+      </div>
     </div>
   </div>
-  <div class="buttons">
-    <button mdbBtn color="primary" id="user-posts" (click)="_UserPosts()">View posts</button>
-    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
-            mdbWavesEffect>New Post
-    </button>
-    <button type="button" mdbBtn color="primary" class="relative waves-light"
-            (click)="editProfile.show(); _defaultValue()" mdbWavesEffect>Edit Profile
-    </button>
-<!--    <a routerLink="edit/{{user.id}}">-->
-<!--      <button mdbBtn color="primary">Edit Profile</button>-->
-<!--    </a>-->
-  </div>
+
   <div *ngIf="vision" class="post-table">
     <table class="table">
       <thead class="thead-dark">
@@ -50,8 +51,6 @@
         <th scope="col">Date</th>
         <th scope="col">Place</th>
         <th scope="col">Comment</th>
-        <th scope="col">Tag</th>
-        <th scope="col">Like</th>
 
       </tr>
       </thead>
@@ -63,8 +62,6 @@
         <td>{{s.date | date: 'dd/MM/yy HH:mm:ss'}}</td>
         <td>{{s.place}}</td>
         <td>{{s.comment?.length}}</td>
-        <td>{{s.tags?.length}}</td>
-        <td>{{s.likes?.length}}</td>
       </tr>
       </tbody>
     </table>

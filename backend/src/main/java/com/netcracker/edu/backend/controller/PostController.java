@@ -36,6 +36,11 @@ public class PostController {
         return postService.save(post);
     }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public Post updatePost(@RequestBody Post post) {
+        return postService.update(post);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePost(@PathVariable(name = "id") Long id) {
         postService.delete(id);

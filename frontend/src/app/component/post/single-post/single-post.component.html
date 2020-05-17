@@ -5,20 +5,22 @@
       <img *ngIf="post && post.photo" src="data:image/jpg;base64,{{post?.photo}}">
     </div>
     <div class="post-info">
-      <h2>{{post.user.login}}</h2>
+      <h2>{{post?.user?.login}}</h2>
       <br>
       <h6>Description:</h6>
-      <h4>{{post.txt}}</h4>
+      <h4>{{post?.txt}}</h4>
       <br>
       <h6>Date:</h6>
-      <h4>{{post.date | date: 'dd/MM/yy HH:mm:ss'}}</h4>
+      <h4>{{post?.date | date: 'dd/MM/yy HH:mm:ss'}}</h4>
       <br>
       <h5>Place: </h5>
-      <h4>{{post.place}}</h4>
+      <h4>{{post?.place}}</h4>
       <br>
       <tr>
-        <td><h5>Likes: {{post.likes.length}}</h5></td>
-        <td><h5>Comments: {{post.comment.length}}</h5></td>
+        <td><h5>Comments: {{post?.comment?.length}}</h5></td>
+      </tr>
+      <tr>
+        <button mdbBtn color="primary" id="post-comments" (click)="_deletePost()">Delete Post</button>
       </tr>
     </div>
   </div>
@@ -29,14 +31,52 @@
     <tr id="comment-header">
       <td>Login</td>
       <td>Comment</td>
+      <td>Date</td>
     </tr>
     <tr *ngFor="let s of post.comment; let r = index ">
-      <td>{{s.user.login}}</td>
-      <td>{{s.txt}}</td>
+      <td>{{s.user?.login}}</td>
+      <td>{{s?.txt}}</td>
+      <td>{{s?.date | date: 'dd/MM/yy HH:mm:ss'}}</td>
     </tr>
+    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
+            mdbWavesEffect>New Comment
+    </button>
   </div>
   </div>
 </div>
 
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide(); _modalReset()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Comment</h4>
+      </div>
+      <div [formGroup]="form">
+
+        <div class="form-group" style="text-align: center">
+          <label for="Comment"><strong>Comment</strong></label>
+          <input class="form-control" name="Comment" id="Comment"
+                    formControlName="field" style="width: 70%; margin: 0 15%">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
+        </button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide(); _commentSave()">
+          Comment
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 <!--<button id="post-comments" (click)="_PostComments()">View posts</button>-->
 <!--<div *ngIf="vision" class="post-table">-->

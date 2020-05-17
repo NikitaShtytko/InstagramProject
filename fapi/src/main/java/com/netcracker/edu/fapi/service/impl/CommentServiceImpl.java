@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -32,6 +33,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment save(Comment entity) {
         RestTemplate restTemplate = new RestTemplate();
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        entity.setDate(time);
         return restTemplate.postForEntity(backendServerUrl + "api/comments/", entity, Comment.class).getBody();
     }
 

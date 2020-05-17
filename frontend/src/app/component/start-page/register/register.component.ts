@@ -83,18 +83,6 @@ export class RegisterComponent implements OnInit {
     this.subscriptions.push(this.userService.saveUser(user).subscribe(response => {this.user = response; console.log(response); }));
   }
 
-  // private loginValidator(): AsyncValidatorFn {
-  //   return control => control.valueChanges
-  //     .pipe(
-  //       debounceTime(500),
-  //       distinctUntilChanged(),
-  //       switchMap((val: string) => this.userService.getUserByLogin(val)),
-  //       map((res: User) => (res != null ? {loginExist: true} : null)),
-  //       first()
-  //     );
-  //   console.log(this.user);
-  // }
-
   private loginValidator(): AsyncValidatorFn {
     return control => control.valueChanges
       .pipe(

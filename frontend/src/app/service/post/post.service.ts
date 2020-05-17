@@ -29,4 +29,13 @@ export class PostService {
   createPost(formData: FormData): Observable<any> {
     return this.httpClient.post('/api/posts', formData);
   }
+
+  updatePost(formData: FormData): Observable<any> {
+    return this.httpClient.put('/api/posts', formData);
+  }
+
+  delete(id: number): Observable<any> {
+    console.log('delete ' + id);
+    return this.httpClient.delete('/api/posts/' + id);
+  }
 }

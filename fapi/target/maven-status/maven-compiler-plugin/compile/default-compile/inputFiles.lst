@@ -17,6 +17,7 @@ D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\e
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\CommentService.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\filter\CORSFilter.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\impl\PostServiceImpl.java
+D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\util\Converter.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\impl\BillingAccountDataServiceImpl.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\models\UserRole.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\PostService.java
@@ -24,6 +25,7 @@ D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\e
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\controller\PostController.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\controller\BanController.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\controller\UserController.java
+D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\security\JwtUser.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\models\LoginUser.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\models\Comment.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\impl\UserServiceImpl.java

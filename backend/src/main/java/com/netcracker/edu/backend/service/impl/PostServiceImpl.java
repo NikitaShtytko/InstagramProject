@@ -3,10 +3,12 @@ package com.netcracker.edu.backend.service.impl;
 import com.netcracker.edu.backend.entity.Post;
 import com.netcracker.edu.backend.repository.PostRepository;
 import com.netcracker.edu.backend.service.PostService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Log4j2
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -34,8 +36,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post update(Post entity) {
-        return null;
+    public Post update(Post post) {
+        log.info("UPDATE");
+        return postRepository.save(post);
     }
 
     @Override

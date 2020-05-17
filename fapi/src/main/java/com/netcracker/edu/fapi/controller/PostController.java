@@ -38,14 +38,36 @@ public class PostController {
                                          @RequestParam("post") String post) throws IOException {
         post = post.replace("\"photo\":{},", "");
         Post postMain = new ObjectMapper().readValue(post, Post.class);
-        postMain.setPhoto(Converter.convertByteArrayToBase64(photo.getBytes()));
-//        if (post != null) {
             if (photo != null) {
+                postMain.setPhoto(Converter.convertByteArrayToBase64(photo.getBytes()));
                 log.info(photo);
-            return ResponseEntity.ok(postService.save(postMain));
         }
-        return null;
+        return ResponseEntity.ok(postService.save(postMain));
     }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<Post> updatePost(@RequestParam(value = "photo", required = false) MultipartFile photo,
+                                         @RequestParam("post") String post) throws IOException {
+        post = post.replace("\"photo\":{},", "");
+        Post postMain = new ObjectMapper().readValue(post, Post.class);
+        if (photo != null) {
+            postMain.setPhoto(Converter.convertByteArrayToBase64(photo.getBytes()));
+            log.info(photo);
+        }
+        return ResponseEntity.ok(postService.update(postMain));
+    }
+
+//    @RequestMapping(method = RequestMethod.POST)
+//    public ResponseEntity<Post> savePost(@RequestParam(value = "photo", required = false) MultipartFile photo,
+//                                         @RequestBody Post post) throws IOException {
+//        post = post.replace("\"photo\":{},", "");
+//        Post postMain = new ObjectMapper().readValue(post, Post.class);
+//            if (photo != null) {
+//                postMain.setPhoto(Converter.convertByteArrayToBase64(photo.getBytes()));
+//                log.info(photo);
+//        }
+//        return ResponseEntity.ok(postService.save(post));
+//    }
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

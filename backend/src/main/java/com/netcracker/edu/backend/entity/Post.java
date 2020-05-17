@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -39,7 +40,9 @@ public class Post {
          )
     Set<User> likes;
 
-    @OneToMany
+    // TODO
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private List<Comment> comment;
 

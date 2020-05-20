@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../service/user/user.service';
-import {User} from '../../moduls/user';
+import {User} from '../../models/user';
 import {Subscription} from 'rxjs';
-import {Post} from '../../moduls/post';
+import {Post} from '../../models/post';
 import {PostService} from '../../service/post/post.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-
-const currentTimeZoneOffsetInHours = new Date().getTimezoneOffset() / 60;
+import {TokenService} from '../../service/token/token.service';
 
 @Component({
   selector: 'app-user-home-page',
@@ -20,20 +19,16 @@ export class UserHomePageComponent implements OnInit {
   login: string;
 
   constructor(private userService: UserService, private postService: PostService,
-              private activateRoute: ActivatedRoute) {
+              private activateRoute: ActivatedRoute, private tokenService: TokenService) {
     this.login = activateRoute.snapshot.params.login;
   }
 
+  public prototype;
   public user: User;
   public post: Post;
   public posts: Post[];
   public vision = false;
   selectedPhoto: File;
-
-  form: FormGroup = new FormGroup({
-    description: new FormControl('', []),
-    place: new FormControl('', [])
-  });
 
   info: FormGroup = new FormGroup(({
     firstName: new FormControl('', [
@@ -50,15 +45,9 @@ export class UserHomePageComponent implements OnInit {
   private myImage: any;
 
   ngOnInit(): void {
-    // this.getUserByLogin('VreDina');
-    // this.subscriptions.push(this.userService.getUserByLogin('test').subscribe(response => {
-    this.subscriptions.push(this.userService.getUserByLogin(this.login).subscribe(response => {
-      this.user = response;
-      console.log(response);
-      this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(result => {
-        this.posts = result;
-      }));
-    }));
+    console.log('user-home-start');
+    this.getUserByLogin(this.tokenService.userDetails?.username);
+    console.log('user-home-end');
   }
 
   onFileSelected(event) {
@@ -72,44 +61,13 @@ export class UserHomePageComponent implements OnInit {
     this.vision = !this.vision;
   }
 
-  _postSave(){
-    const postData = new FormData();
-    const post = new Post();
-    const user = this.user;
-
-    post.txt = this.form.controls.description.value;
-    post.place = this.form.controls.place.value;
-
-    this.user.photo = null;
-    post.user = this.user;
-    this.user = user;
-
-    postData.append('photo', this.selectedPhoto);
-    postData.append('post', JSON.stringify(post));
-
-    console.log(postData);
-    console.log(post);
-    // this.savePost(post);
-    this.postService.createPost(postData).subscribe(res => console.log(res));
-
-    this.form.reset();
-    this.ngOnInit();
-  }
-
-  private savePost(post: Post) {
-    this.subscriptions.push(this.postService.savePost(post).subscribe(response => {this.post = response; console.log(response); }));
-    this.getPostsByUserId(this.user.id);
-  }
-
   _modalReset(){
-    this.form.reset();
     this.info.reset();
   }
 
   public getUserByLogin(login: string): void {
     this.subscriptions.push(this.userService.getUserByLogin(login).subscribe(response => {
       this.user = response;
-      console.log(response);
     }));
   }
 
@@ -125,16 +83,15 @@ export class UserHomePageComponent implements OnInit {
     if (this.selectedPhoto != null) {
           providerData.append('photo', this.selectedPhoto);
         }
-
+    // this.user.role.toString().toUpperCase();
     this.user.firstName = this.info.controls.firstName.value;
     this.user.lastName = this.info.controls.lastName.value;
-    console.log(this.user);
 
     providerData.append('user', JSON.stringify(this.user));
 
     this.subscriptions.push(this.userService.updateInfo(providerData).subscribe(response => {
       this.user = response;
-      this.form.reset();
+      this.info.reset();
     }));
   }
 

@@ -28,15 +28,9 @@
       </table>
       <div class="buttons">
         <button mdbBtn color="primary" id="user-posts" (click)="_UserPosts()">View posts</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
-                mdbWavesEffect>New Post
-        </button>
         <button type="button" mdbBtn color="primary" class="relative waves-light"
                 (click)="editProfile.show(); _defaultValue()" mdbWavesEffect>Edit Profile
         </button>
-        <!--    <a routerLink="edit/{{user.id}}">-->
-        <!--      <button mdbBtn color="primary">Edit Profile</button>-->
-        <!--    </a>-->
       </div>
     </div>
   </div>
@@ -45,7 +39,6 @@
     <table class="table">
       <thead class="thead-dark">
       <tr>
-        <th scope="col">Id</th>
         <th scope="col">Photo</th>
         <th scope="col">Text</th>
         <th scope="col">Date</th>
@@ -56,8 +49,9 @@
       </thead>
       <tbody class="thead-dark-child">
       <tr *ngFor="let s of posts; let r = index;">
-        <td><a routerLink="post/{{s.id}}">{{s.id}}</a></td>
-        <td><img width="534" height="300" src="data:image/jpg;base64,{{s.photo}}" alt="Ну и зря"></td>
+<!--        <td><a routerLink="post/{{s.id}}">{{s.id}}</a></td>-->
+<!--        <td><img width="534" height="300" src="data:image/jpg;base64,{{s.photo}}" alt="Ну и зря"></td>-->
+        <td><a routerLink="post/{{s.id}}"><img width="534" height="300" src="data:image/jpg;base64,{{s.photo}}" alt="Ну и зря"></a></td>
         <td>{{s.txt}}</td>
         <td>{{s.date | date: 'dd/MM/yy HH:mm:ss'}}</td>
         <td>{{s.place}}</td>
@@ -65,48 +59,6 @@
       </tr>
       </tbody>
     </table>
-  </div>
-</div>
-
-
-<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-     aria-hidden="true">
-
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide(); _modalReset()">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title w-100" id="myModalLabel">New Post</h4>
-      </div>
-      <div [formGroup]="form">
-
-        <div class="form-group">
-          <label for="photo"><strong>Choose Photo</strong></label>
-          <input type="file" class="form-control-file" id="photo"
-                 (change)="onFileSelected($event)" accept="image/jpeg,image/png">
-          <label for="Description"><strong>Description</strong></label>
-
-          <!--          <label>First name</label>-->
-          <!--          <input type="text" class="form-control" placeholder="" formControlName="firstName">-->
-          <textarea class="form-control" name="Description" id="Description" cols="30" rows="10"
-                    formControlName="description"></textarea>
-
-          <label for="Place"><strong>Place</strong></label>
-          <textarea class="form-control" name="Place" id="Place" cols="30" rows="2" formControlName="place"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
-        </button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide(); _postSave()">
-          Post
-        </button>
-      </div>
-
-    </div>
   </div>
 </div>
 
@@ -130,7 +82,7 @@
           <input type="file" class="form-control-file" id="photo"
                  (change)="onFileSelected($event)" accept="image/jpeg,image/png">
 
-          <label for="Description"><strong>First Name</strong></label>
+          <label for="firstName"><strong>First Name</strong></label>
           <!--          <label>First name</label>-->
           <!--          <input type="text" class="form-control" placeholder="" formControlName="firstName">-->
           <input class="form-control" name="firstName" id="firstName"
@@ -140,7 +92,7 @@
             Please enter your name, using 2-40 Cyrillic or Latin characters
           </div>
 
-          <label for="Place"><strong>Last Name</strong></label>
+          <label for="lastName"><strong>Last Name</strong></label>
           <input class="form-control" name="lastName" id="lastName" formControlName="lastName">
           <div class="red-text"
                *ngIf="info.controls['lastName'].invalid && info.controls['lastName'].dirty">
@@ -162,6 +114,4 @@
     </div>
   </div>
 </div>
-<!--<app-new-post></app-new-post>-->
 
-<!--<app-single-post></app-single-post>-->

@@ -1,4 +1,4 @@
-import {User} from '../../moduls/user';
+import {User} from '../../models/user';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -46,7 +46,6 @@ export class UserService {
   }
 
   updateInfo(formData: FormData): Observable<any> {
-    console.log('PUT');
     return this.httpClient.put('/api/users/', formData);
   }
 

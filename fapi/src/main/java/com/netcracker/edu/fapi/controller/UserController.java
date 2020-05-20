@@ -29,7 +29,6 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public User saveUser(@RequestBody User user){
-        log.info(user);
         return userService.save(user);
     }
 
@@ -51,7 +50,8 @@ public class UserController {
 
     @RequestMapping(value = "/login/{login}", method = RequestMethod.GET)
     public User getUserByLogin(@PathVariable(name = "login") String login) {
-        return userService.findByLogin(login);
+        User user = userService.findByLogin(login);
+        return user;
     }
 
     @RequestMapping(value = "/email/{email}", method = RequestMethod.GET)

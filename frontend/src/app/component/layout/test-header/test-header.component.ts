@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Post} from '../../../moduls/post';
+import {Post} from '../../../models/post';
 import {Subscription} from 'rxjs';
 import {FormControl, FormGroup} from '@angular/forms';
 import {PostService} from '../../../service/post/post.service';
+import {UserService} from '../../../service/user/user.service';
+import {TokenService} from '../../../service/token/token.service';
+import {User} from '../../../models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-test-header',
@@ -12,6 +16,7 @@ import {PostService} from '../../../service/post/post.service';
 export class TestHeaderComponent implements OnInit {
 
   public post: Post;
+  public user: User;
   public subscriptions: Subscription[] = [];
   selectedPhoto: File;
 
@@ -22,35 +27,56 @@ export class TestHeaderComponent implements OnInit {
 
   });
 
-  constructor(private postService: PostService) {
+  constructor(private userService: UserService,
+              private postService: PostService,
+              private tokenService: TokenService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.getUserByLogin(this.tokenService?.userDetails?.username);
+  }
+
+  get userExist() {
+    return this.tokenService.userDetails;
+  }
+
+  logOut() {
+    this.tokenService.logOut();
+    this.router.navigate(['']);
+  }
+
+  public getUserByLogin(login: string): void {
+    this.subscriptions.push(this.userService.getUserByLogin(login).subscribe(response => {
+      this.user = response;
+    }));
+  }
+
+  onFileSelected(event) {
+    this.selectedPhoto = event.target.files[0];
   }
 
   _onSave(){
+    const postData = new FormData();
     const post = new Post();
+    const user = this.user;
+
     post.txt = this.form.controls.description.value;
     post.place = this.form.controls.place.value;
 
-    // post.user = this.user;
+    this.user.photo = null;
+    post.user = this.user;
+    this.user = user;
 
-    const providerData = new FormData();
+    postData.append('photo', this.selectedPhoto);
+    postData.append('post', JSON.stringify(post));
 
-    providerData.append('photo', this.selectedPhoto);
-
-    this.savePost(post);
-    this.form.reset();
-  }
-
-
-
-  private savePost(post: Post) {
-    this.subscriptions.push(this.postService.savePost(post).subscribe(response => {this.post = response; console.log(response); }));
+    this.postService.createPost(postData).subscribe( res => {
+      window.location.reload();
+    });
   }
 
   _modalReset(){
     this.form.reset();
   }
-
 }

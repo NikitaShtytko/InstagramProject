@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Like} from '../../moduls/like';
+import {Like} from '../../models/like';
 
 @Injectable({
   providedIn: 'root'

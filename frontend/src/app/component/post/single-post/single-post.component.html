@@ -1,5 +1,5 @@
 <div class="body">
-  <div class="in-body">
+  <div class="in-body" *ngIf="globalVision">
   <div class="shell">
     <div class="post-photo">
       <img *ngIf="post && post.photo" src="data:image/jpg;base64,{{post?.photo}}">
@@ -20,7 +20,7 @@
         <td><h5>Comments: {{post?.comment?.length}}</h5></td>
       </tr>
       <tr>
-        <button mdbBtn color="primary" id="post-comments" (click)="_deletePost()">Delete Post</button>
+        <button mdbBtn color="primary" id="post-comments" *ngIf="deleteButton" (click)="_deletePost()">Delete Post</button>
       </tr>
     </div>
   </div>

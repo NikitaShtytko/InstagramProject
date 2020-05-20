@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {PostService} from '../../../service/post/post.service';
-import {Post} from '../../../moduls/post';
+import {Post} from '../../../models/post';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CommentsService} from '../../../service/comments/comments.service';
-import {Comments} from '../../../moduls/comments';
+import {Comments} from '../../../models/comments';
+import {TokenService} from '../../../service/token/token.service';
+import {User} from '../../../models/user';
+import {UserService} from '../../../service/user/user.service';
 
 @Component({
   selector: 'app-single-post',
@@ -15,14 +18,21 @@ import {Comments} from '../../../moduls/comments';
 export class SinglePostComponent implements OnInit {
 
   public post: Post;
+  public user: User;
   public comment: Comments;
   public subscriptions: Subscription[] = [];
   public vision = false;
+  public globalVision = false;
+  public deleteButton = false;
 
   id: number;
 
-  constructor(private postService: PostService, private commentService: CommentsService,
-              private activateRoute: ActivatedRoute, private router: Router) {
+  constructor(private postService: PostService,
+              private commentService: CommentsService,
+              private activateRoute: ActivatedRoute,
+              private router: Router,
+              private tokenService: TokenService,
+              private userService: UserService) {
     this.id = activateRoute.snapshot.params.id;
   }
 
@@ -32,6 +42,17 @@ export class SinglePostComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPostById(this.id);
+    this.tokenService.getUserDetails().subscribe((res: any) => {
+      this.subscriptions.push(this.userService.getUserByLogin(res.username).subscribe(response => {
+        this.user = response;
+        console.log(this.user);
+        if (this.user.login === this.post.user.login){
+          this.deleteButton = !this.deleteButton;
+        }
+        console.log(this.user);
+        this.globalVision = !this.globalVision;
+      }));
+    });
   }
 
   public getPostById(id: number): void{
@@ -49,18 +70,9 @@ export class SinglePostComponent implements OnInit {
   _commentSave(){
     // const postData = new FormData();
     const comment = new Comments();
-    //
-    // comment.txt = this.form.controls.field.value;
-    // console.log(this.post);
-    // comment.user = this.post.user;
-    // console.log(this.post);
-    // this.post.comment.push(comment);
-    // TODO через токен
-    // postData.append('photo', this.post.photo);
-    // postData.append('post', JSON.stringify(this.post));
 
     comment.txt = this.form.controls.field.value;
-    comment.user = this.post.user;
+    comment.user = this.user;
     this.post.comment = null;
     comment.post = this.post;
 

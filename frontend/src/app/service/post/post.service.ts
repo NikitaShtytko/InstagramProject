@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Post} from '../../moduls/post';
+import {Post} from '../../models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,6 @@ export class PostService {
   }
 
   delete(id: number): Observable<any> {
-    console.log('delete ' + id);
     return this.httpClient.delete('/api/posts/' + id);
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {Tag} from '../../../moduls/tag';
+import {Tag} from '../../../models/tag';
 import {TagService} from '../../../service/tag/tag.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class TagComponent implements OnInit {
   }
 
   public getTags(): void{
-    this.subscriptions.push(this.tagService.getTags().subscribe(response => {this.tag = response; console.log(response); }));
+    this.subscriptions.push(this.tagService.getTags().subscribe(response => {this.tag = response; }));
   }
 
 }

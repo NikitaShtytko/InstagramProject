@@ -16,6 +16,3 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 }
-
-export class NgbdDropdownBasic {
-}

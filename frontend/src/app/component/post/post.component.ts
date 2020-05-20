@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {Post} from '../../moduls/post';
+import {Post} from '../../models/post';
 import {PostService} from '../../service/post/post.service';
 
 @Component({
@@ -17,14 +17,14 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts();
-    // this.getPostsByUserId(2);
   }
 
   public getPosts(): void{
-    this.subscriptions.push(this.postService.getPosts().subscribe(response => {this.posts = response; console.log(response); }));
+    this.subscriptions.push(this.postService.getPosts().subscribe(response => {this.posts = response; }));
   }
 
   public getPostsByUserId(id: number): void{
-    this.subscriptions.push(this.postService.getPostsByUserId(id).subscribe(response => {this.posts = response; console.log(response); }));
+    this.subscriptions.push(this.postService.getPostsByUserId(id).subscribe(response =>
+    {this.posts = response; }));
   }
 }

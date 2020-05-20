@@ -1,10 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
-// import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
 import {UserComponent} from './component/end-to-end/user/user.component';
 import {HeaderComponent} from './component/header/components/header.component';
@@ -19,9 +18,13 @@ import {SinglePostComponent} from './component/post/single-post/single-post.comp
 import {TestHeaderComponent} from './component/layout/test-header/test-header.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {NotFoundComponent} from './component/layout/not-found/not-found.component';
+import {NewPostComponent} from './component/user-home-page/new-post/new-post.component';
+import {AuthenticationInterceptor} from './interceptor/authentication.interceptor';
+import {EditProfileComponent} from './component/user-home-page/edit-profile/edit-profile.component';
+import {TokenService} from './service/token/token.service';
 
 const appRoutes: Routes = [
-  {path: '#', component: PostComponent},
+  {path: '', component: RegisterComponent},
   {path: 'ban', component: BanComponent},
   {path: 'comments', component: CommentsComponent},
   {path: 'posts', component: PostComponent},
@@ -37,7 +40,10 @@ const appRoutes: Routes = [
   {path: '**', component: NotFoundComponent},
 ];
 
-
+const appConfig = (config: TokenService) => {
+  return() => {
+    return config.loadConfig();
+  }; };
 
 @NgModule({
   declarations: [
@@ -54,17 +60,29 @@ const appRoutes: Routes = [
     SinglePostComponent,
     TestHeaderComponent,
     NotFoundComponent,
+    NewPostComponent,
+    EditProfileComponent
   ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        // Ng4LoadingSpinnerModule.forRoot(),
         MDBBootstrapModule.forRoot(),
         RouterModule.forRoot(appRoutes),
         ReactiveFormsModule,
     ],
-  providers: [],
+  entryComponents: [ NewPostComponent, EditProfileComponent],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: appConfig,
+    multi: true,
+    deps: [TokenService]
+  },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

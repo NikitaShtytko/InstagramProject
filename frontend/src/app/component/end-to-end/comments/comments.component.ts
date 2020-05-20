@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Comments} from '../../../moduls/comments';
+import {Comments} from '../../../models/comments';
 import {CommentsService} from '../../../service/comments/comments.service';
 import {Subscription} from 'rxjs';
 
@@ -23,7 +23,7 @@ export class CommentsComponent implements OnInit {
   }
 
   public getComments(): void{
-    this.subscriptions.push(this.commentsService.getComments().subscribe(response => {this.comments = response; console.log(response); }));
+    this.subscriptions.push(this.commentsService.getComments().subscribe(response => {this.comments = response;}));
   }
 
 }

@@ -2,7 +2,7 @@
 <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand>
+  <mdb-navbar-brand *ngIf="userExist">
     <a id="home-link" mdbBtn color="primary" class="navbar-brand" [routerLink]="['/home']">Home</a>
   </mdb-navbar-brand>
 
@@ -10,7 +10,7 @@
   <links>
 
     <!-- Links -->
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" *ngIf="userExist">
       <li class="nav-item">
         <a id="new-post-button" mdbBtn color="primary" class="nav-link waves-light" mdbWavesEffect
            [routerLink]="['/posts']">News
@@ -38,11 +38,22 @@
     </ul>
 
     <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form my-0">
+      <div class="md-form my-0" *ngIf="!userExist">
         <ul class="navbar-nav mr-right">
           <li class="nav-item active">
+<!--            <a class="nav-link">{{user.username}}</a>-->
             <a mdbBtn color="primary" class="nav-link waves-light" mdbWavesEffect
                [routerLink]="['/register']">Sign Up / Sign In</a>
+          </li>
+        </ul>
+      </div>
+    </form>
+
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0" *ngIf="userExist">
+        <ul class="navbar-nav mr-right">
+          <li class="nav-item active">
+            <a mdbBtn color="primary" class="nav-link waves-light" mdbWavesEffect (click)="logOut()">Log Out</a>
           </li>
         </ul>
       </div>
@@ -98,8 +109,8 @@
 
         <div class="form-group">
           <label for="photo"><strong>Choose Photo</strong></label>
-          <input type="file" class="form-control-file" id="photo">
-
+          <input type="file" class="form-control-file" id="photo"
+                 (change)="onFileSelected($event)" accept="image/jpeg,image/png">
           <label for="Description"><strong>Description</strong></label>
 
           <!--          <label>First name</label>-->
@@ -108,7 +119,7 @@
                     formControlName="description"></textarea>
 
           <label for="Place"><strong>Place</strong></label>
-          <textarea class="form-control" name="Place" id="Place" cols="30" rows="2" formControlName="place"></textarea>
+          <textarea class="form-control" name="Place" id="Place" colse="30" rows="2" formControlName="place"></textarea>
         </div>
       </div>
       <div class="modal-footer">

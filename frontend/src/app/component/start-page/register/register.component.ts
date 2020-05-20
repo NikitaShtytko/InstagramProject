@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../moduls/user';
+import {User} from '../../../models/user';
 import {UserService} from '../../../service/user/user.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
@@ -69,18 +69,14 @@ export class RegisterComponent implements OnInit {
     this.user.lastName = this.form.controls.lastName.value;
     this.user.password = this.form.controls.password.value;
     this.user.email = this.form.controls.email.value;
-
-    console.log('register');
-
-    console.log(this.user);
     this.subscriptions.push(this.userService.saveUser(this.user).subscribe(response =>
-    {this.user = response; console.log(response);
-     this.router.navigate(['/home/' + this.user.login]);
+    {this.user = response;
+     this.router.navigate(['/login']);
     }));
   }
 
   public saveUser(user: User): void{
-    this.subscriptions.push(this.userService.saveUser(user).subscribe(response => {this.user = response; console.log(response); }));
+    this.subscriptions.push(this.userService.saveUser(user).subscribe(response => {this.user = response; }));
   }
 
   private loginValidator(): AsyncValidatorFn {
@@ -134,7 +130,6 @@ export class RegisterComponent implements OnInit {
 
   public gender(name: string): void{
     this.user.gender = name;
-    console.log(this.user.gender);
   }
 
 

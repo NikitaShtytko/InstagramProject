@@ -1,14 +1,11 @@
-<!--Navbar-->
-<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo">
+<mdb-navbar class="navigation" SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo">
 
-  <!-- Navbar brand -->
   <mdb-navbar-brand *ngIf="userExist">
     <a id="home-link" mdbBtn color="primary" class="navbar-brand" [routerLink]="['/home']">Home</a>
   </mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
-
     <!-- Links -->
     <ul class="navbar-nav mr-auto" *ngIf="userExist">
       <li class="nav-item">
@@ -22,32 +19,32 @@
                 mdbWavesEffect>New Post
         </button>
       </li>
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link waves-light" mdbWavesEffect-->
-<!--           [routerLink]="['/post']">News-->
-<!--        </a>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link waves-light" mdbWavesEffect-->
-<!--           [routerLink]="['/login']">Sign In</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link waves-light" mdbWavesEffect-->
-<!--           [routerLink]="['/register']">Sign Up</a>-->
-<!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <a class="nav-link waves-light" mdbWavesEffect-->
+      <!--           [routerLink]="['/post']">News-->
+      <!--        </a>-->
+      <!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <a class="nav-link waves-light" mdbWavesEffect-->
+      <!--           [routerLink]="['/login']">Sign In</a>-->
+      <!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <a class="nav-link waves-light" mdbWavesEffect-->
+      <!--           [routerLink]="['/register']">Sign Up</a>-->
+      <!--      </li>-->
     </ul>
 
-    <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form my-0" *ngIf="!userExist">
-        <ul class="navbar-nav mr-right">
-          <li class="nav-item active">
-<!--            <a class="nav-link">{{user.username}}</a>-->
-            <a mdbBtn color="primary" class="nav-link waves-light" mdbWavesEffect
-               [routerLink]="['/register']">Sign Up / Sign In</a>
-          </li>
-        </ul>
-      </div>
-    </form>
+<!--    <form class="form-inline waves-light" mdbWavesEffect>-->
+<!--      <div class="md-form my-0" *ngIf="!userExist">-->
+<!--        <ul class="navbar-nav mr-right">-->
+<!--          <li class="nav-item active">-->
+<!--            &lt;!&ndash;            <a class="nav-link">{{user.username}}</a>&ndash;&gt;-->
+<!--            <a mdbBtn color="primary" class="nav-link waves-light" mdbWavesEffect-->
+<!--               [routerLink]="['/register']">Sign Up / Sign In</a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </form>-->
 
     <form class="form-inline waves-light" mdbWavesEffect>
       <div class="md-form my-0" *ngIf="userExist">
@@ -59,32 +56,32 @@
       </div>
     </form>
 
-      <!-- Dropdown -->
-<!--      <li class="nav-item dropdown" dropdown>-->
-<!--        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>-->
-<!--          Basic dropdown<span class="caret"></span></a>-->
-<!--        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">-->
-<!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>-->
-<!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>-->
-<!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>-->
-<!--          <div class="divider dropdown-divider"></div>-->
-<!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>-->
-<!--        </div>-->
-<!--      </li>-->
+    <!-- Dropdown -->
+    <!--      <li class="nav-item dropdown" dropdown>-->
+    <!--        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>-->
+    <!--          Basic dropdown<span class="caret"></span></a>-->
+    <!--        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">-->
+    <!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>-->
+    <!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>-->
+    <!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>-->
+    <!--          <div class="divider dropdown-divider"></div>-->
+    <!--          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>-->
+    <!--        </div>-->
+    <!--      </li>-->
 
-<!--     Links -->
+    <!--     Links -->
 
     <!-- Search form -->
-<!--    <form class="form-inline waves-light" mdbWavesEffect>-->
-<!--      <div class="md-form my-0">-->
-<!--        <input class="form-control mr-sm-2" type="text" placeholder="Search">-->
-<!--      </div>-->
-<!--    </form>-->
+    <!--    <form class="form-inline waves-light" mdbWavesEffect>-->
+    <!--      <div class="md-form my-0">-->
+    <!--        <input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+    <!--      </div>-->
+    <!--    </form>-->
 
-  <!-- Collapsible content -->
+    <!-- Collapsible content -->
   </links>
-</mdb-navbar>
 
+</mdb-navbar>
 
 
 <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
@@ -100,21 +97,12 @@
       </div>
       <div [formGroup]="form">
 
-        <!--        <div class="custom-file mb-3">-->
-        <!--          <input type="file" class="custom-file-input" id="photo" (change)="onFileSelected($event)"-->
-        <!--                 accept="image/jpeg,image/png" placeholder="">-->
-        <!--        </div>-->
-
-        <!--        <label class="custom-file-label" for="photo">Select a photo in png or jpg format</label>-->
-
         <div class="form-group">
           <label for="photo"><strong>Choose Photo</strong></label>
           <input type="file" class="form-control-file" id="photo"
                  (change)="onFileSelected($event)" accept="image/jpeg,image/png">
           <label for="Description"><strong>Description</strong></label>
 
-          <!--          <label>First name</label>-->
-          <!--          <input type="text" class="form-control" placeholder="" formControlName="firstName">-->
           <textarea class="form-control" name="Description" id="Description" cols="30" rows="10"
                     formControlName="description"></textarea>
 
@@ -126,12 +114,11 @@
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                 (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
         </button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide(); _onSave()">
-          Post
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                (click)="basicModal.hide(); _onSave()">Post
         </button>
       </div>
 
     </div>
   </div>
 </div>
-<!--/.Navbar-->

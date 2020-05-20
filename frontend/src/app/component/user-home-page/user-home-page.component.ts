@@ -42,12 +42,9 @@ export class UserHomePageComponent implements OnInit {
   }));
 
   public subscriptions: Subscription[] = [];
-  private myImage: any;
 
   ngOnInit(): void {
-    console.log('user-home-start');
     this.getUserByLogin(this.tokenService.userDetails?.username);
-    console.log('user-home-end');
   }
 
   onFileSelected(event) {
@@ -95,20 +92,6 @@ export class UserHomePageComponent implements OnInit {
     }));
   }
 
-  // updateProvider() {
-  //   const providerData = new FormData();
-  //   if (this.selectedPhoto != null) {
-  //     providerData.append("photo", this.selectedPhoto);
-  //   }
-  //
-  //   this.provider.name = this.providerForm.get('name').value;
-  //   this.provider.price = this.providerForm.get('price').value;
-  //   this.provider.description = this.providerForm.get('description').value;
-  //
-  //   providerData.append("provider", JSON.stringify(this.provider));
-  //
-  //   this.providerService.updateProvider(providerData).subscribe(res => this.mdbModalRef.hide());
-  // }
   _defaultValue() {
     this.info.controls.firstName.setValue(this.user.firstName);
     this.info.controls.lastName.setValue(this.user.lastName);

@@ -2,7 +2,9 @@
   width: 100px;
 }
 
-.navbar fixed-top navbar-expand-lg navbar-dark indigo
+.navigation{
+  height: auto !important;
+}
 
 .form-group{
   margin-top: 1%;

@@ -38,7 +38,7 @@ export class TestHeaderComponent implements OnInit {
   }
 
   get userExist() {
-    return this.tokenService.userDetails;
+    return this.tokenService?.userDetails;
   }
 
   logOut() {

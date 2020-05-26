@@ -14,12 +14,14 @@ D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\e
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\BanService.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\models\UserGender.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\security\JwtUserFactory.java
+D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\exception\ServiceException.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\security\JwtAuthenticationEntryPoint.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\security\WebSecurityConfig.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\models\Ban.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\models\Tag.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\UserService.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\models\Post.java
+D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\exception\EntryNotFoundException.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\CommentService.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\security\SecurityJwtConstants.java
 D:\Projects\IDEA\Netcracker\InstagramProject\fapi\src\main\java\com\netcracker\edu\fapi\service\impl\PostServiceImpl.java

@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
       login:  this.form.controls.login.value,
       password: this.form.controls.password.value,
     };
+    this.tokenService.logOut();
     this.tokenService.generateToken(user).subscribe((res: AuthToken) => {
       localStorage.setItem(SecurityConstants.AUTHORIZATION, res.value);
       this.tokenService.getUserDetails().subscribe(() => {

@@ -35,5 +35,7 @@ com\netcracker\edu\fapi\models\Post.class
 com\netcracker\edu\fapi\security\JwtAuthenticationFilter.class
 com\netcracker\edu\fapi\models\User.class
 com\netcracker\edu\fapi\security\JwtUser.class
+com\netcracker\edu\fapi\service\exception\EntryNotFoundException.class
+com\netcracker\edu\fapi\service\exception\ServiceException.class
 com\netcracker\edu\fapi\service\impl\BillingAccountDataServiceImpl.class
 com\netcracker\edu\fapi\util\Converter.class

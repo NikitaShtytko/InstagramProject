@@ -3,6 +3,7 @@
   <div class="post-photo">
     <a routerLink="post/{{s.id}}">
       <img src="data:image/jpg;base64,{{s?.photo}}" alt="Not Visible or No Photo">
+<!--      <img src="{{s?.photo}}" alt="Not Visible or No Photo">-->
     </a>
   </div>
   <div  class="post-info">
@@ -10,10 +11,11 @@
     <br>
     <h5>Description: </h5>
     <h4>{{s?.txt}}</h4>
+    <h5>Comments: </h5>
+    <h4>{{s?.comment?.length}}</h4>
     <br>
     <h6>Date:</h6>
     <h4>{{s?.date | date: 'dd/MM/yy HH:mm:ss'}}</h4>
-    <br>
     <h5>Place: </h5>
     <h4>{{s?.place}}</h4>
     <br>

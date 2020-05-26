@@ -24,6 +24,7 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getById(commentId));
     }
 
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Comment> saveComment(@RequestBody Comment comment) {
         if (comment != null) {

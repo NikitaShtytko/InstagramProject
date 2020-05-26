@@ -17,11 +17,15 @@ import {TokenService} from '../../service/token/token.service';
 export class UserHomePageComponent implements OnInit {
 
   login: string;
+  public img: string;
 
   constructor(private userService: UserService, private postService: PostService,
               private activateRoute: ActivatedRoute, private tokenService: TokenService) {
     this.login = activateRoute.snapshot.params.login;
   }
+
+  public details;
+  public userRole;
 
   public prototype;
   public user: User;
@@ -45,6 +49,9 @@ export class UserHomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserByLogin(this.tokenService.userDetails?.username);
+    this.details = this.tokenService.userDetails;
+    this.userRole = this.details?.authorities[0]?.authority;
+    console.log(this.userRole);
   }
 
   onFileSelected(event) {
@@ -65,6 +72,12 @@ export class UserHomePageComponent implements OnInit {
   public getUserByLogin(login: string): void {
     this.subscriptions.push(this.userService.getUserByLogin(login).subscribe(response => {
       this.user = response;
+      if (this.user.photo === null){
+        this.img = 'assets/images/person.png';
+      }
+      else {
+        this.img = 'data:image/png;base64,' + this.user.photo;
+      }
     }));
   }
 
@@ -88,6 +101,7 @@ export class UserHomePageComponent implements OnInit {
 
     this.subscriptions.push(this.userService.updateInfo(providerData).subscribe(response => {
       this.user = response;
+      this.img = response.photo;
       this.info.reset();
     }));
   }

@@ -20,12 +20,12 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Post>> getAllPosts(){
         return ResponseEntity.ok(postService.getAll());
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Post> getPost(@PathVariable String id) throws InterruptedException {
         Long postId = Long.valueOf(id);
         Post post = postService.getById(postId);

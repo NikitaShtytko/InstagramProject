@@ -59,6 +59,7 @@ export class TestHeaderComponent implements OnInit {
   _onSave(){
     const postData = new FormData();
     const post = new Post();
+    console.log('header ' + this.user);
     const user = this.user;
 
     post.txt = this.form.controls.description.value;

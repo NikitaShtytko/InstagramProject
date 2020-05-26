@@ -1,7 +1,8 @@
 <div class="body">
   <div class="user-info">
     <div class="left-column">
-      <img id="user-photo" *ngIf="user && user.photo" src="data:image/jpg;base64,{{user?.photo}}">
+      <img id="user-photo" [src]="img" alt="No Photo">
+<!--           *ngIf="user && user.photo" src="data:image/jpg;base64,{{user?.photo}}" >-->
     </div>
     <div class="right-column">
       <table>
@@ -32,6 +33,9 @@
                 (click)="editProfile.show(); _defaultValue()" mdbWavesEffect>Edit Profile
         </button>
       </div>
+      <div class="interesting-info">
+        <span>User registered {{user?.created | date: 'dd/MM/yy' }}</span>
+      </div>
     </div>
   </div>
 
@@ -44,7 +48,6 @@
         <th scope="col">Date</th>
         <th scope="col">Place</th>
         <th scope="col">Comment</th>
-
       </tr>
       </thead>
       <tbody class="thead-dark-child">

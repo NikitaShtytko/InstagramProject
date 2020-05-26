@@ -5,6 +5,8 @@ import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {AsyncValidatorFn, FormControl, FormGroup, Validators} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, first, map, switchMap} from 'rxjs/operators';
+import {AuthToken, SecurityConstants} from '../../../models/AuthToken';
+import {TokenService} from "../../../service/token/token.service";
 
 @Component({
   selector: 'app-register',
@@ -12,6 +14,8 @@ import {debounceTime, distinctUntilChanged, first, map, switchMap} from 'rxjs/op
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  private success = false;
 
   form: FormGroup = new FormGroup({
 
@@ -52,7 +56,8 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(private userService: UserService,
-              private router: Router) {}
+              private router: Router,
+              private tokenService: TokenService) {}
 
   public subscriptions: Subscription[] = [];
 
@@ -64,6 +69,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+
+    const user = {
+      login:  this.form.controls.login.value,
+      password: this.form.controls.password.value,
+    };
+
     this.user.login = this.form.controls.login.value;
     this.user.firstName = this.form.controls.firstName.value;
     this.user.lastName = this.form.controls.lastName.value;
@@ -71,7 +82,13 @@ export class RegisterComponent implements OnInit {
     this.user.email = this.form.controls.email.value;
     this.subscriptions.push(this.userService.saveUser(this.user).subscribe(response =>
     {this.user = response;
-     this.router.navigate(['/login']);
+     this.tokenService.generateToken(user).subscribe((res: AuthToken) => {
+        localStorage.setItem(SecurityConstants.AUTHORIZATION, res.value);
+        this.tokenService.getUserDetails().subscribe(() => {
+          this.router.navigate(['/home/']);
+        });
+      });
+
     }));
   }
 

@@ -11,5 +11,6 @@ export class User {
   gender: string;
   status: string;
   photo: string;
+  created: Date;
   ban: Ban[];
 }

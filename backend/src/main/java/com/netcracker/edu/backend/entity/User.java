@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -41,6 +42,9 @@ public class User {
 
     @Column(name = "photo")
     private String photo;
+
+    @Column(name = "created")
+    private Timestamp created;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)

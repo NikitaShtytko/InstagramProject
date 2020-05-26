@@ -1,3 +1,7 @@
+.html{
+  background-color: lightblue;
+}
+
 .body{
   margin-top: 73px;
   background: linear-gradient(180deg, lightpink, lightblue);
@@ -7,7 +11,8 @@
 
 .user-info{
   display: flex;
-  height: 93vh;
+  min-height: 100vh;
+  height: auto;
 }
 
 .right-column{
@@ -89,6 +94,7 @@ input{
 
 .post-table{
   width: 98%;
+  margin-top: -15%;
 }
 
 .post{
@@ -119,4 +125,13 @@ input{
 .post-photo img{
   height: 405px;
   width: 720px;
+}
+
+.interesting-info{
+  width: 500px;
+  color: white;
+  font-size: 50px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: dodgerblue;
+  text-align: center;
 }

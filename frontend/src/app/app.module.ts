@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule, Routes} from '@angular/router';
 import {UserComponent} from './component/end-to-end/user/user.component';
-import {HeaderComponent} from './component/header/components/header.component';
 import {BanComponent} from './component/end-to-end/ban/ban.component';
 import {CommentsComponent} from './component/end-to-end/comments/comments.component';
 import {PostComponent} from './component/post/post.component';
@@ -49,7 +48,6 @@ const appConfig = (config: TokenService) => {
   declarations: [
     AppComponent,
     UserComponent,
-    HeaderComponent,
     BanComponent,
     CommentsComponent,
     PostComponent,

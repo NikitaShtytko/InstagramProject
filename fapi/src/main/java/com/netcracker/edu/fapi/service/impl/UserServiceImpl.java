@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -72,6 +73,8 @@ public class UserServiceImpl implements UserService, UserDetailsService{
     @Override
     public User save(User user) {
         RestTemplate restTemplate = new RestTemplate();
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        user.setCreated(time);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return restTemplate.postForEntity(backendServerUrl + "/api/users/", user, User.class).getBody();
     }

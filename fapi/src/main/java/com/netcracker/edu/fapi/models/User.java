@@ -3,6 +3,7 @@ package com.netcracker.edu.fapi.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,6 +18,7 @@ public class User {
     private UserRole role;
     private UserGender gender;
     private String status;
+    private Timestamp created;
     private List<Ban> ban;
     private String photo;
 }

@@ -34,7 +34,7 @@ export class SinglePostComponent implements OnInit {
   constructor(private postService: PostService,
               private commentService: CommentsService,
               private activateRoute: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private tokenService: TokenService,
               private userService: UserService) {
     this.id = activateRoute.snapshot.params.id;
@@ -119,5 +119,9 @@ export class SinglePostComponent implements OnInit {
 
   get txt() {
     return this.form.get('txt');
+  }
+
+  _navigate(login: string): void {
+    this.router.navigate(['home', login]);
   }
 }

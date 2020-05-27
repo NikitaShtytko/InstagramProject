@@ -22,21 +22,21 @@ import {AuthenticationInterceptor} from './interceptor/authentication.intercepto
 import {EditProfileComponent} from './component/user-home-page/edit-profile/edit-profile.component';
 import {TokenService} from './service/token/token.service';
 import {CanActivateService} from './service/can-activate/can-activate.service';
+import {UserPageComponent} from './component/user-home-page/user-page/user-page.component';
 
 const appRoutes: Routes = [
+  // {path: 'ban', component: BanComponent, canActivate: [CanActivateService]},
+  // {path: 'comments', component: CommentsComponent, canActivate: [CanActivateService]},
+  // {path: 'tag', component: TagComponent, canActivate: [CanActivateService]},
+  // {path: 'user', component: UserComponent, canActivate: [CanActivateService]},
   {path: '', component: RegisterComponent},
-  {path: 'ban', component: BanComponent, canActivate: [CanActivateService]},
-  {path: 'comments', component: CommentsComponent, canActivate: [CanActivateService]},
   {path: 'posts', component: PostComponent, canActivate: [CanActivateService]},
-  {path: 'tag', component: TagComponent, canActivate: [CanActivateService]},
-  {path: 'user', component: UserComponent, canActivate: [CanActivateService]},
   {path: 'home', component: UserHomePageComponent, canActivate: [CanActivateService]},
-  {path: 'home/:login', component: UserHomePageComponent, canActivate: [CanActivateService]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'home/:login', component: UserPageComponent},
   {path: 'home/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
   {path: 'posts/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
-  {path: 'home/:login/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
   {path: '**', component: NotFoundComponent},
 ];
 
@@ -60,7 +60,8 @@ const appConfig = (config: TokenService) => {
     TestHeaderComponent,
     NotFoundComponent,
     NewPostComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    UserPageComponent
   ],
     imports: [
         BrowserModule,

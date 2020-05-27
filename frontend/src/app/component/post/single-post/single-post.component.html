@@ -5,7 +5,10 @@
         <img *ngIf="post && post.photo" src="data:image/jpg;base64,{{post?.photo}}">
       </div>
       <div class="post-info">
-        <h2 style="margin-right: 30px;">{{post?.user?.login}}</h2>
+        <h2>
+          <!--          <a routerLink="../../../home/{{post.user.login}}">{{post?.user?.login}}</a>-->
+          <a (click)="_navigate(post?.user?.login);">{{post?.user?.login}}</a>
+        </h2>
         <br>
         <h6>Description:</h6>
         <h4>{{post?.txt}}</h4>
@@ -26,7 +29,7 @@
         </tr>
       </div>
     </div>
-<!--    <button mdbBtn color="primary" id="post-comments" (click)="_postComments()">Show Comments</button>-->
+    <!--    <button mdbBtn color="primary" id="post-comments" (click)="_postComments()">Show Comments</button>-->
 
     <div class="comment-area">
       <h4>Comments:</h4>
@@ -36,14 +39,16 @@
         <td style="flex: 1; margin-right: 15px;">Date</td>
       </tr>
       <div class="comment-scroll">
-      <tr *ngFor="let s of post.comment; let r = index ">
-        <td style="flex: 5">{{s?.txt}}</td>
-        <td style="flex: 1">{{s.user?.login}}</td>
-        <td style="flex: 1;">{{s?.date | date: 'dd/MM/yy HH:mm:ss'}}
-        <img *ngIf="s.user.login == this.user.login || this.userRole == 'ROLE_ADMIN'"
-          height="20px" width="20px" src="assets/images/delete-icon.png"
-          (click)="_deleteComment(s.id)" alt="delete"></td>
-      </tr>
+        <tr *ngFor="let s of post.comment; let r = index ">
+          <td style="flex: 5">{{s?.txt}}</td>
+          <td style="flex: 1">
+            <a (click)="_navigate(s.user?.login)">{{s.user?.login}}</a>
+          </td>
+          <td style="flex: 1;">{{s?.date | date: 'dd/MM/yy HH:mm:ss'}}
+            <img *ngIf="s.user.login == this.user.login || this.userRole == 'ROLE_ADMIN'"
+                 height="20px" width="20px" src="assets/images/delete-icon.png"
+                 (click)="_deleteComment(s.id)" alt="delete"></td>
+        </tr>
       </div>
       <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
               mdbWavesEffect>New Comment
@@ -70,12 +75,12 @@
         <div class="form-group" style="text-align: center">
           <label for="Comment"><strong>Comment</strong></label>
           <input class="form-control" name="Comment" id="Comment"
-                 formControlName="txt" style="width: 70%; margin: 0 15%" >
+                 formControlName="txt" style="width: 70%; margin: 0 15%">
           <div class="alert alert-danger mt-3"
                *ngIf="form.controls['txt'].invalid && form.controls['txt'].dirty">
-<!--               *ngIf="nullValue"-->
+            <!--               *ngIf="nullValue"-->
 
-                Sorry, your comment is incorrect
+            Sorry, your comment is incorrect
           </div>
         </div>
       </div>
@@ -84,7 +89,7 @@
                 (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
         </button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-        (click)="basicModal.hide(); _commentSave()" [disabled]="form.invalid">
+                (click)="basicModal.hide(); _commentSave()" [disabled]="form.invalid">
           Comment
         </button>
       </div>

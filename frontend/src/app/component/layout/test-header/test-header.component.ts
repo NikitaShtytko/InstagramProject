@@ -44,7 +44,7 @@ export class TestHeaderComponent implements OnInit {
 
   logOut() {
     this.tokenService.logOut();
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 
   public getUserByLogin(login: string): void {

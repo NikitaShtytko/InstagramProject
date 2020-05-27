@@ -7,7 +7,7 @@
       </a>
     </div>
     <div class="post-all-info">
-      <h1><strong>{{s.user?.login}}</strong></h1>
+      <h1><strong><a (click)="_navigate(s.user?.login)">{{s.user?.login}}</a></strong></h1>
     <div class="post-info">
 
       <div class="first-column">

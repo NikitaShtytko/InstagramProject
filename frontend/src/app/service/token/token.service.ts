@@ -23,6 +23,11 @@ export class TokenService {
     return localStorage.getItem(SecurityConstants.AUTHORIZATION);
   }
 
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem(SecurityConstants.AUTHORIZATION);
+    return token != null;
+  }
+
   getUserDetails(){
     return this.http.get(this.tokenUrl + '/details').pipe(
       tap((resUser: User) => {
@@ -44,8 +49,6 @@ export class TokenService {
   logOut() {
     localStorage.removeItem(SecurityConstants.AUTHORIZATION);
     this.userDetails = null;
-    console.log(this.userDetails);
-    console.log(localStorage.getItem(SecurityConstants.AUTHORIZATION));
   }
 
   loadConfig() {

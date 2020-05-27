@@ -15,7 +15,7 @@
         </a>
       </li>
       <li>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"
+        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="newPostModal.show()"
                 mdbWavesEffect>New Post
         </button>
       </li>
@@ -84,13 +84,13 @@
 </mdb-navbar>
 
 
-<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<div mdbModal #newPostModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
      aria-hidden="true">
 
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide(); _modalReset()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="newPostModal.hide(); _modalReset()">
           <span aria-hidden="true">×</span>
         </button>
         <h4 class="modal-title w-100" id="myModalLabel">New Post</h4>
@@ -101,6 +101,9 @@
           <label for="photo"><strong>Choose Photo</strong></label>
           <input type="file" class="form-control-file" id="photo"
                  (change)="onFileSelected($event)" accept="image/jpeg,image/png">
+          <div class="red-text" *ngIf="!selectedFile">
+            Incorrect file type. Choose only jpg/png.
+          </div>
           <label for="Description"><strong>Description</strong></label>
 
           <textarea class="form-control" name="Description" id="Description" cols="30" rows="10"
@@ -112,10 +115,10 @@
       </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                (click)="basicModal.hide(); _modalReset()" mdbWavesEffect>Close
+                (click)="newPostModal.hide(); _modalReset()" mdbWavesEffect>Close
         </button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                (click)="basicModal.hide(); _onSave()">Post
+                [disabled]="!selectedFile" (click)="newPostModal.hide(); _onSave()">Post
         </button>
       </div>
 

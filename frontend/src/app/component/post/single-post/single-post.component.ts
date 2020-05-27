@@ -25,7 +25,8 @@ export class SinglePostComponent implements OnInit {
   public subscriptions: Subscription[] = [];
   public vision = false;
   public globalVision = false;
-  public deleteButton = false;
+  public deletePostButton = false;
+  public deleteCommentButton = false;
   public nullValue = false;
 
   id: number;
@@ -42,7 +43,7 @@ export class SinglePostComponent implements OnInit {
   form: FormGroup = new FormGroup({
     txt: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-zA-Zа-яА-Я0-9_ \']{1,50}$')
+      Validators.pattern('^[a-zA-Zа-яА-Я0-9_ \']{1,120}$')
     ]),
   });
 
@@ -56,7 +57,7 @@ export class SinglePostComponent implements OnInit {
           this.details = this.tokenService.userDetails;
           this.userRole = this.details?.authorities[0]?.authority;
           if (this.user.login === this.post.user.login || this.userRole === 'ROLE_ADMIN'){
-            this.deleteButton = !this.deleteButton;
+            this.deletePostButton = !this.deletePostButton;
           }
           console.log(this.user);
           this.globalVision = !this.globalVision;
@@ -105,6 +106,14 @@ export class SinglePostComponent implements OnInit {
   _deletePost() {
     this.postService.delete(this.post.id).subscribe(response => {
       this.router.navigateByUrl('/posts');
+    });
+  }
+
+  _deleteComment(id: number): void{
+    this.commentService.delete(id).subscribe(res => {
+      this.commentService.getCommentsByPostId(this.post.id).subscribe(result => {
+        this.post.comment = result.reverse();
+      });
     });
   }
 

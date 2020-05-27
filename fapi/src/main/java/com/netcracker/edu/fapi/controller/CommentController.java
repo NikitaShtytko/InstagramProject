@@ -24,6 +24,12 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getById(commentId));
     }
 
+    @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Comment>> getCommentByPostId(@PathVariable(name = "id") Long id) {
+        Iterable<Comment> comments = commentService.findCommentsByPostId(id);
+        return ResponseEntity.ok(comments);
+    }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Comment> saveComment(@RequestBody Comment comment) {

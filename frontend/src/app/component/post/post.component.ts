@@ -22,12 +22,9 @@ export class PostComponent implements OnInit {
   public getPosts(): void{
     this.subscriptions.push(this.postService.getPosts().subscribe(response => {
       this.posts = response;
-      console.log(this.posts[0].photo);
       this.posts.forEach((value, index, array) => {
-        value.photo = 'data:image/png;base64,' + value;
-        // console.log(value.photo);
+        value.photo = 'data:image/png;base64,' + value.photo;
       });
-      console.log(this.posts[0].photo);
     }));
   }
 

@@ -21,21 +21,22 @@ import {NewPostComponent} from './component/user-home-page/new-post/new-post.com
 import {AuthenticationInterceptor} from './interceptor/authentication.interceptor';
 import {EditProfileComponent} from './component/user-home-page/edit-profile/edit-profile.component';
 import {TokenService} from './service/token/token.service';
+import {CanActivateService} from './service/can-activate/can-activate.service';
 
 const appRoutes: Routes = [
   {path: '', component: RegisterComponent},
-  {path: 'ban', component: BanComponent},
-  {path: 'comments', component: CommentsComponent},
-  {path: 'posts', component: PostComponent},
-  {path: 'tag', component: TagComponent},
-  {path: 'user', component: UserComponent},
-  {path: 'home', component: UserHomePageComponent},
-  {path: 'home/:login', component: UserHomePageComponent},
+  {path: 'ban', component: BanComponent, canActivate: [CanActivateService]},
+  {path: 'comments', component: CommentsComponent, canActivate: [CanActivateService]},
+  {path: 'posts', component: PostComponent, canActivate: [CanActivateService]},
+  {path: 'tag', component: TagComponent, canActivate: [CanActivateService]},
+  {path: 'user', component: UserComponent, canActivate: [CanActivateService]},
+  {path: 'home', component: UserHomePageComponent, canActivate: [CanActivateService]},
+  {path: 'home/:login', component: UserHomePageComponent, canActivate: [CanActivateService]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home/post/:id', component: SinglePostComponent},
-  {path: 'posts/post/:id', component: SinglePostComponent},
-  {path: 'home/:login/post/:id', component: SinglePostComponent},
+  {path: 'home/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
+  {path: 'posts/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
+  {path: 'home/:login/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
   {path: '**', component: NotFoundComponent},
 ];
 

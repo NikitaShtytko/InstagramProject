@@ -24,9 +24,8 @@
 }
 
 table{
-  /*background-color: rgba(235, 235, 224, 0.2);*/
   background-color: rgba(255, 255, 255, 0.3);
-  margin: 20px;
+  margin: 20px 20px 0;
   width: 500px;
   height: 300px;
 }
@@ -82,10 +81,11 @@ textarea{
 
 .form-group label{
   margin-top: 3%;
+  text-align: center;
 }
 
 input{
-  margin-left: 30%;
+  margin-left: 25%;
   width: 50%;
 }
 
@@ -129,9 +129,9 @@ input{
 
 .interesting-info{
   width: 500px;
-  color: white;
-  font-size: 50px;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: dodgerblue;
+  color: black;
+  font-size: 20px;
+  /*-webkit-text-stroke-width: 2px;*/
+  /*-webkit-text-stroke-color: dodgerblue;*/
   text-align: center;
 }

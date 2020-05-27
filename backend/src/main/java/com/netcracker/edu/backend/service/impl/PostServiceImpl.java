@@ -31,13 +31,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(Post post) {
-//        sessionFactory.getCurrentSession().update(post.getLikes());
         return postRepository.save(post);
     }
 
     @Override
     public Post update(Post post) {
-        log.info("UPDATE");
         return postRepository.save(post);
     }
 

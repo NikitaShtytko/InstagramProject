@@ -35,10 +35,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment save(Comment comment) {
-//        Optional<User> user = userService.getById(comment.getUser().getId());
-//        Optional<Post> post = postService.getById(comment.getPost().getId());
-//        comment.setUser(user.get());
-//        comment.setPost(post.get());
         return commentRepository.save(comment);
     }
 
@@ -59,6 +55,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Iterable<Comment> findCommentsByPostId(Long id) {
-       return commentRepository.findCommentsByPostId(id);
+        return commentRepository.findCommentsByPostId(id);
     }
 }

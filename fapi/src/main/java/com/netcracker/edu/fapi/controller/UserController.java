@@ -70,4 +70,9 @@ public class UserController {
         Boolean userEmail = userService.existEmail(email);
         return userEmail;
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deletePost(@PathVariable String id) {
+        userService.delete(Long.valueOf(id));
+    }
 }

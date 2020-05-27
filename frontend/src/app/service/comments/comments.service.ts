@@ -17,4 +17,12 @@ export class CommentsService {
   saveComment(comment: Comments) {
     return this.httpClient.post<Comments>('/api/comments/', comment);
   }
+
+  getCommentsByPostId(id: number): Observable<Comments[]> {
+  return this.httpClient.get<Comments[]>('/api/comments/post/' + id);
+}
+
+  delete(id: number) {
+    return this.httpClient.delete('/api/comments/' + id);
+  }
 }

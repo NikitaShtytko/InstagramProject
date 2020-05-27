@@ -31,6 +31,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Iterable<Comment> findCommentsByPostId(Long id) {
+        RestTemplate restTemplate = new RestTemplate();
+        Comment[] comment = restTemplate.getForObject(backendServerUrl + "api/comments/post/" + id, Comment[].class);
+        return comment == null ? Collections.emptyList() : Arrays.asList(comment);
+    }
+
+    @Override
     public Comment save(Comment entity) {
         RestTemplate restTemplate = new RestTemplate();
         Timestamp time = new Timestamp(System.currentTimeMillis());
@@ -48,4 +55,6 @@ public class CommentServiceImpl implements CommentService {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(backendServerUrl + "api/comments/" + id);
     }
+
+
 }

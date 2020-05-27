@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {Post} from '../../models/post';
 import {PostService} from '../../service/post/post.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TokenService} from '../../service/token/token.service';
 
 @Component({
@@ -16,11 +16,15 @@ import {TokenService} from '../../service/token/token.service';
 
 export class UserHomePageComponent implements OnInit {
 
-  login: string;
+  private login: string;
+  public userImg: string;
   public img: string;
 
-  constructor(private userService: UserService, private postService: PostService,
-              private activateRoute: ActivatedRoute, private tokenService: TokenService) {
+  constructor(private userService: UserService,
+              private postService: PostService,
+              private activateRoute: ActivatedRoute,
+              private tokenService: TokenService,
+              private router: Router) {
     this.login = activateRoute.snapshot.params.login;
   }
 
@@ -32,6 +36,7 @@ export class UserHomePageComponent implements OnInit {
   public post: Post;
   public posts: Post[];
   public vision = false;
+  public selectedFile = true;
   selectedPhoto: File;
 
   info: FormGroup = new FormGroup(({
@@ -51,16 +56,30 @@ export class UserHomePageComponent implements OnInit {
     this.getUserByLogin(this.tokenService.userDetails?.username);
     this.details = this.tokenService.userDetails;
     this.userRole = this.details?.authorities[0]?.authority;
-    console.log(this.userRole);
   }
 
-  onFileSelected(event) {
+  onUserFileSelected(event) {
     this.selectedPhoto = event.target.files[0];
+    if (this.selectedPhoto !== null){
+      if (this.selectedPhoto.type === 'image/jpeg' || this.selectedPhoto.type === 'image/png') {
+        this.selectedFile = true;
+        console.log('true');
+      }
+      else {
+        this.selectedFile = false;
+        console.log('false');
+      }
+    }
   }
 
   _UserPosts(): void {
     this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(response => {
       this.posts = response;
+      this.posts.forEach(value => {
+        if (value !== null){
+          value.photo = 'data:image/png;base64,' + value.photo;
+        }
+      });
     }));
     this.vision = !this.vision;
   }
@@ -73,10 +92,10 @@ export class UserHomePageComponent implements OnInit {
     this.subscriptions.push(this.userService.getUserByLogin(login).subscribe(response => {
       this.user = response;
       if (this.user.photo === null){
-        this.img = 'assets/images/person.png';
+        this.userImg = 'assets/images/person.png';
       }
       else {
-        this.img = 'data:image/png;base64,' + this.user.photo;
+        this.userImg = 'data:image/png;base64,' + this.user.photo;
       }
     }));
   }
@@ -89,11 +108,10 @@ export class UserHomePageComponent implements OnInit {
 
   _editSave() {
     const providerData = new FormData();
-
     if (this.selectedPhoto != null) {
           providerData.append('photo', this.selectedPhoto);
         }
-    // this.user.role.toString().toUpperCase();
+
     this.user.firstName = this.info.controls.firstName.value;
     this.user.lastName = this.info.controls.lastName.value;
 
@@ -101,7 +119,7 @@ export class UserHomePageComponent implements OnInit {
 
     this.subscriptions.push(this.userService.updateInfo(providerData).subscribe(response => {
       this.user = response;
-      this.img = response.photo;
+      this.userImg = 'data:image/png;base64,' + response.photo;
       this.info.reset();
     }));
   }
@@ -109,5 +127,12 @@ export class UserHomePageComponent implements OnInit {
   _defaultValue() {
     this.info.controls.firstName.setValue(this.user.firstName);
     this.info.controls.lastName.setValue(this.user.lastName);
+  }
+
+  _deleteUser(): void{
+    this.userService.deleteUser(this.user.id).subscribe(res => {
+      this.tokenService.logOut();
+      this.router.navigate(['']);
+    });
   }
 }

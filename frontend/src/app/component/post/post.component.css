@@ -19,7 +19,7 @@
   width: 99%;
   height: 410px;
   display: flex;
-  background-color: rgba(255, 182, 193, 0.45);
+  background-color: rgba(255, 182, 193, 0.8);
   border-radius: 5px;
   border-style: solid;
   border-color: black;
@@ -29,10 +29,42 @@
   flex: 1;
 }
 
-.post-info{
+#login{
+  margin: 20px;
+}
+
+.post-all-info{
   text-align: left;
   flex: 1;
   margin: 1%;
+}
+
+.post-info{
+  display: flex;
+  margin: 20px;
+}
+
+.post-info h3{
+  font-weight: bold;
+  background-color: lightblue;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 8px 5px 0;
+}
+
+.post-info h4{
+  background-color: wheat;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 0 5px;
+}
+
+.post-info div{
+  flex: 1;
+}
+
+.post-info span{
+  font-size: 30px;
 }
 
 #info{

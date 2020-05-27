@@ -19,6 +19,7 @@ export class TestHeaderComponent implements OnInit {
   public user: User;
   public subscriptions: Subscription[] = [];
   selectedPhoto: File;
+  selectedFile = true;
 
   form: FormGroup = new FormGroup({
 
@@ -54,6 +55,16 @@ export class TestHeaderComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedPhoto = event.target.files[0];
+    if (this.selectedPhoto !== null){
+      if (this.selectedPhoto.type === 'image/jpeg' || this.selectedPhoto.type === 'image/png') {
+        this.selectedFile = true;
+        console.log('true');
+      }
+      else {
+        this.selectedFile = false;
+        console.log('false');
+      }
+    }
   }
 
   _onSave(){

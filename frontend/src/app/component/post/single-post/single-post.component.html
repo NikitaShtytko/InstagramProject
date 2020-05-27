@@ -20,7 +20,7 @@
           <td><h5>Comments: {{post?.comment?.length}}</h5></td>
         </tr>
         <tr>
-          <button mdbBtn color="primary" id="post-comments" *ngIf="deleteButton"
+          <button mdbBtn color="primary" id="post-comments" *ngIf="deletePostButton"
                   (click)="_deletePost()">Delete Post
           </button>
         </tr>
@@ -31,15 +31,18 @@
     <div class="comment-area">
       <h4>Comments:</h4>
       <tr id="comment-header">
-        <td>Login</td>
-        <td>Comment</td>
-        <td>Date</td>
+        <td style="flex: 5">Comment</td>
+        <td style="flex: 1">Login</td>
+        <td style="flex: 1; margin-right: 15px;">Date</td>
       </tr>
       <div class="comment-scroll">
       <tr *ngFor="let s of post.comment; let r = index ">
-        <td>{{s.user?.login}}</td>
-        <td>{{s?.txt}}</td>
-        <td>{{s?.date | date: 'dd/MM/yy HH:mm:ss'}}</td>
+        <td style="flex: 5">{{s?.txt}}</td>
+        <td style="flex: 1">{{s.user?.login}}</td>
+        <td style="flex: 1;">{{s?.date | date: 'dd/MM/yy HH:mm:ss'}}
+        <img *ngIf="s.user.login == this.user.login || this.userRole == 'ROLE_ADMIN'"
+          height="20px" width="20px" src="assets/images/delete-icon.png"
+          (click)="_deleteComment(s.id)" alt="delete"></td>
       </tr>
       </div>
       <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()"

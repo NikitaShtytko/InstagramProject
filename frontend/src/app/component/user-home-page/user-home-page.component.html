@@ -1,8 +1,8 @@
 <div class="body">
   <div class="user-info">
     <div class="left-column">
-      <img id="user-photo" [src]="img" alt="No Photo">
-<!--           *ngIf="user && user.photo" src="data:image/jpg;base64,{{user?.photo}}" >-->
+      <img id="user-photo" [src]="userImg" alt="No Photo">
+      <!--           *ngIf="user && user.photo" src="data:image/jpg;base64,{{user?.photo}}" >-->
     </div>
     <div class="right-column">
       <table>
@@ -26,15 +26,21 @@
           <td>Gender</td>
           <td>{{user?.gender}}</td>
         </tr>
+        <tr>
+          <td>Registered</td>
+          <td>{{user?.created | date: 'dd/MM/yy'}}</td>
+        </tr>
+        <tr *ngIf="userRole == 'ROLE_ADMIN'">
+          <td>Role</td>
+          <td>Admin</td>
+        </tr>
       </table>
+
       <div class="buttons">
         <button mdbBtn color="primary" id="user-posts" (click)="_UserPosts()">View posts</button>
         <button type="button" mdbBtn color="primary" class="relative waves-light"
                 (click)="editProfile.show(); _defaultValue()" mdbWavesEffect>Edit Profile
         </button>
-      </div>
-      <div class="interesting-info">
-        <span>User registered {{user?.created | date: 'dd/MM/yy' }}</span>
       </div>
     </div>
   </div>
@@ -52,9 +58,11 @@
       </thead>
       <tbody class="thead-dark-child">
       <tr *ngFor="let s of posts; let r = index;">
-<!--        <td><a routerLink="post/{{s.id}}">{{s.id}}</a></td>-->
-<!--        <td><img width="534" height="300" src="data:image/jpg;base64,{{s.photo}}" alt="Ну и зря"></td>-->
-        <td><a routerLink="post/{{s.id}}"><img width="534" height="300" src="data:image/jpg;base64,{{s.photo}}" alt="Ну и зря"></a></td>
+        <td><a routerLink="post/{{s.id}}">
+          <!--          <img width="534" height="300" src="data:image/jpg;base64,{{s.photo}}" alt="Ну и зря">-->
+          <img width="534" height="300" src="{{s?.photo}}" alt="No photo">
+        </a>
+        </td>
         <td>{{s.txt}}</td>
         <td>{{s.date | date: 'dd/MM/yy HH:mm:ss'}}</td>
         <td>{{s.place}}</td>
@@ -83,13 +91,15 @@
 
           <label for="photo"><strong>Choose Photo</strong></label>
           <input type="file" class="form-control-file" id="photo"
-                 (change)="onFileSelected($event)" accept="image/jpeg,image/png">
-
+                 (change)="onUserFileSelected($event)" accept="image/jpeg,image/png">
+          <div class="red-text" *ngIf="!selectedFile">
+                  Incorrect file type. Choose only jpg/png.
+          </div>
           <label for="firstName"><strong>First Name</strong></label>
           <!--          <label>First name</label>-->
           <!--          <input type="text" class="form-control" placeholder="" formControlName="firstName">-->
           <input class="form-control" name="firstName" id="firstName"
-                    formControlName="firstName">
+                 formControlName="firstName">
           <div class="red-text"
                *ngIf="info.controls['firstName'].invalid && info.controls['firstName'].dirty">
             Please enter your name, using 2-40 Cyrillic or Latin characters
@@ -101,6 +111,12 @@
                *ngIf="info.controls['lastName'].invalid && info.controls['lastName'].dirty">
             Please enter your name, using 2-40 Cyrillic or Latin characters
           </div>
+          <div style="margin-top: 20px">
+            <button type="button" mdbBtn color="red" class="relative waves-light" mdbWavesEffect
+                    (click)="deleteProfile.show(); editProfile.hide();">
+              Delete Account
+            </button>
+          </div>
 
         </div>
       </div>
@@ -109,7 +125,7 @@
                 (click)="editProfile.hide(); _modalReset()" mdbWavesEffect>Close
         </button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                [disabled]="info.invalid" (click)="editProfile.hide(); _editSave()">
+                [disabled]="info.invalid || !selectedFile" (click)="editProfile.hide(); _editSave()">
           Save
         </button>
       </div>
@@ -117,4 +133,33 @@
     </div>
   </div>
 </div>
+
+<div mdbModal #deleteProfile="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+
+  <div class="modal-dialog modal-md" role="document" style="text-align: center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Are you sure?</h4>
+      </div>
+      <div style="margin: 5% 10%; font-size: 20px">
+        If you continue, the account will be deleted, without the possibility of recovery
+      </div>
+
+      <div class="modal-footer" style="display: flex">
+        <button type="button" mdbBtn color="primary" class="relative waves-light" style="flex: 1" mdbWavesEffect
+                (click)="deleteProfile.hide(); _deleteUser();">
+          Delete
+        </button>
+        <button type="button" mdbBtn color="secondary" class="waves-light" style="flex: 1"
+                (click)="deleteProfile.hide();" mdbWavesEffect>Cancel
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 

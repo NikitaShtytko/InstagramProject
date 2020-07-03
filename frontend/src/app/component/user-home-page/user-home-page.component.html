@@ -58,7 +58,7 @@
       </thead>
       <tbody class="thead-dark-child">
       <tr *ngFor="let s of posts; let r = index;">
-        <td><a routerLink="post/{{s.id}}">
+        <td><a (click)="_navigate(s.id)">
           <!--          <img width="534" height="300" src="data:image/jpg;base64,{{s.photo}}" alt="Ну и зря">-->
           <img width="534" height="300" src="{{s?.photo}}" alt="No photo">
         </a>
@@ -70,6 +70,9 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  <div *ngIf="noPosts" id="case-no-posts">
+    <h2>You have no posts.</h2>
   </div>
 </div>
 

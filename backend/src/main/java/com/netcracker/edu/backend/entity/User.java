@@ -7,9 +7,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-
-@Entity
 @Data
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

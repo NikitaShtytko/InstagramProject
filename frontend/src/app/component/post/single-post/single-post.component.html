@@ -6,7 +6,6 @@
       </div>
       <div class="post-info">
         <h2>
-          <!--          <a routerLink="../../../home/{{post.user.login}}">{{post?.user?.login}}</a>-->
           <a (click)="_navigate(post?.user?.login);">{{post?.user?.login}}</a>
         </h2>
         <br>
@@ -23,7 +22,7 @@
           <td><h5>Comments: {{post?.comment?.length}}</h5></td>
         </tr>
         <tr>
-          <button mdbBtn color="primary" id="post-comments" *ngIf="deletePostButton"
+          <button mdbBtn color="red" id="post-comments" *ngIf="deletePostButton"
                   (click)="_deletePost()">Delete Post
           </button>
         </tr>

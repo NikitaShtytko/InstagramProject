@@ -18,15 +18,13 @@ export class UserHomePageComponent implements OnInit {
 
   private login: string;
   public userImg: string;
-  public img: string;
+  public noPosts: boolean;
 
   constructor(private userService: UserService,
               private postService: PostService,
               private activateRoute: ActivatedRoute,
               private tokenService: TokenService,
-              private router: Router) {
-    this.login = activateRoute.snapshot.params.login;
-  }
+              private router: Router) {}
 
   public details;
   public userRole;
@@ -63,25 +61,33 @@ export class UserHomePageComponent implements OnInit {
     if (this.selectedPhoto !== null){
       if (this.selectedPhoto.type === 'image/jpeg' || this.selectedPhoto.type === 'image/png') {
         this.selectedFile = true;
-        console.log('true');
       }
       else {
         this.selectedFile = false;
-        console.log('false');
       }
     }
   }
 
   _UserPosts(): void {
-    this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(response => {
-      this.posts = response;
-      this.posts.forEach(value => {
-        if (value !== null){
-          value.photo = 'data:image/png;base64,' + value.photo;
+    if (!this.vision){
+      this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(response => {
+        this.posts = response;
+        if (this.posts.length === 0){
+          this.noPosts = true;
         }
-      });
-    }));
-    this.vision = !this.vision;
+        else{
+          this.posts.forEach(value => {
+            if (value !== null){
+              value.photo = 'data:image/png;base64,' + value.photo;
+            }
+          });
+          this.vision = !this.vision;
+        }
+      }));
+    }
+    else {
+      this.vision = !this.vision;
+    }
   }
 
   _modalReset(){
@@ -134,5 +140,9 @@ export class UserHomePageComponent implements OnInit {
       this.tokenService.logOut();
       this.router.navigate(['']);
     });
+  }
+
+  _navigate(id: number): void {
+    this.router.navigate(['post', id]);
   }
 }

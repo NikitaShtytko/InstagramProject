@@ -62,7 +62,6 @@ public class PostController {
 //        Post postMain = new ObjectMapper().readValue(post, Post.class);
 //            if (photo != null) {
 //                postMain.setPhoto(Converter.convertByteArrayToBase64(photo.getBytes()));
-//                log.info(photo);
 //        }
 //        return ResponseEntity.ok(postService.save(post));
 //    }

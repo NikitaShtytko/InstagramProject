@@ -59,7 +59,6 @@ export class SinglePostComponent implements OnInit {
           if (this.user.login === this.post.user.login || this.userRole === 'ROLE_ADMIN'){
             this.deletePostButton = !this.deletePostButton;
           }
-          console.log(this.user);
           this.globalVision = !this.globalVision;
         }));
       });
@@ -70,7 +69,6 @@ export class SinglePostComponent implements OnInit {
     this.subscriptions.push(this.postService.getPostById(id).subscribe(response =>
     {this.post = response;
      this.post.comment.reverse();
-     console.log(this.post.user);
     }));
   }
 
@@ -87,7 +85,6 @@ export class SinglePostComponent implements OnInit {
     comment.txt = this.form.controls.txt.value;
     if (comment.txt === '' || comment.txt === null){
       this.nullValue = !this.nullValue;
-      console.log('null');
     }
     else {
     comment.user = this.user;

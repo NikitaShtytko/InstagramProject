@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {AsyncValidatorFn, FormControl, FormGroup, Validators} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, first, map, switchMap} from 'rxjs/operators';
 import {AuthToken, SecurityConstants} from '../../../models/AuthToken';
-import {TokenService} from "../../../service/token/token.service";
+import {TokenService} from '../../../service/token/token.service';
 
 @Component({
   selector: 'app-register',

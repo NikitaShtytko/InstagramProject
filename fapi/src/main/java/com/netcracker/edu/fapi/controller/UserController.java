@@ -21,7 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<User> getAllUsers(){
         return (List<User>) userService.getAll();
@@ -31,11 +30,6 @@ public class UserController {
     public User saveUser(@RequestBody User user){
         return userService.save(user);
     }
-
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public User getUserById(@PathVariable(name = "id") long id){
-//        return userService.findById(id);
-//    }
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<User> saveUser(@RequestParam(value = "photo", required = false) MultipartFile photo,

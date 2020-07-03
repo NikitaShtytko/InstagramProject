@@ -6,8 +6,8 @@ import lombok.Data;
 import java.sql.Timestamp;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     private Long id;
     private String login;

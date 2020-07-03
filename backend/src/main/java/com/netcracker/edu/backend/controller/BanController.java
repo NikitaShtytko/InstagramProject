@@ -24,7 +24,6 @@ public class BanController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Ban> getBanById(@PathVariable(name = "id") Long id) {
         Optional<Ban> bans = banService.getById(id);
-        log.info("Get Info By Info");
         return bans.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

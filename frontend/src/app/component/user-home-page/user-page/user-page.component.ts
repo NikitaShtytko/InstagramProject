@@ -16,7 +16,7 @@ export class UserPageComponent implements OnInit {
 
   private login: string;
   public userImg: string;
-  public img: string;
+  public noPosts: boolean;
 
   constructor(private userService: UserService,
               private postService: PostService,
@@ -40,15 +40,25 @@ export class UserPageComponent implements OnInit {
   }
 
   _UserPosts(): void {
+    if (!this.vision){
     this.subscriptions.push(this.postService.getPostsByUserId(this.user.id).subscribe(response => {
       this.posts = response;
-      this.posts.forEach(value => {
-        if (value !== null){
-          value.photo = 'data:image/png;base64,' + value.photo;
-        }
-      });
+      if (this.posts.length === 0){
+        this.noPosts = true;
+      }
+      else{
+        this.posts.forEach(value => {
+          if (value !== null){
+            value.photo = 'data:image/png;base64,' + value.photo;
+          }
+        });
+        this.vision = !this.vision;
+      }
     }));
-    this.vision = !this.vision;
+    }
+    else {
+      this.vision = !this.vision;
+    }
   }
 
   public getUserByLogin(login: string): void {
@@ -69,4 +79,7 @@ export class UserPageComponent implements OnInit {
     });
   }
 
+  _navigate(id: number): void {
+    this.router.navigate(['post', id]);
+  }
 }

@@ -17,7 +17,6 @@ import {SinglePostComponent} from './component/post/single-post/single-post.comp
 import {TestHeaderComponent} from './component/layout/test-header/test-header.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {NotFoundComponent} from './component/layout/not-found/not-found.component';
-import {NewPostComponent} from './component/user-home-page/new-post/new-post.component';
 import {AuthenticationInterceptor} from './interceptor/authentication.interceptor';
 import {EditProfileComponent} from './component/user-home-page/edit-profile/edit-profile.component';
 import {TokenService} from './service/token/token.service';
@@ -28,14 +27,14 @@ const appRoutes: Routes = [
   // {path: 'ban', component: BanComponent, canActivate: [CanActivateService]},
   // {path: 'comments', component: CommentsComponent, canActivate: [CanActivateService]},
   // {path: 'tag', component: TagComponent, canActivate: [CanActivateService]},
-  // {path: 'user', component: UserComponent, canActivate: [CanActivateService]},
+  {path: 'user', component: UserComponent},
   {path: '', component: RegisterComponent},
   {path: 'posts', component: PostComponent, canActivate: [CanActivateService]},
   {path: 'home', component: UserHomePageComponent, canActivate: [CanActivateService]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home/:login', component: UserPageComponent},
-  {path: 'home/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
+  {path: 'home/:login', component: UserPageComponent, canActivate: [CanActivateService]},
+  {path: 'post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
   {path: 'posts/post/:id', component: SinglePostComponent, canActivate: [CanActivateService]},
   {path: '**', component: NotFoundComponent},
 ];
@@ -59,7 +58,6 @@ const appConfig = (config: TokenService) => {
     SinglePostComponent,
     TestHeaderComponent,
     NotFoundComponent,
-    NewPostComponent,
     EditProfileComponent,
     UserPageComponent
   ],
@@ -71,7 +69,7 @@ const appConfig = (config: TokenService) => {
         RouterModule.forRoot(appRoutes),
         ReactiveFormsModule,
     ],
-  entryComponents: [ NewPostComponent, EditProfileComponent],
+  entryComponents: [ EditProfileComponent],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: appConfig,

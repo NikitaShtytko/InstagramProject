@@ -58,11 +58,9 @@ export class TestHeaderComponent implements OnInit {
     if (this.selectedPhoto !== null){
       if (this.selectedPhoto.type === 'image/jpeg' || this.selectedPhoto.type === 'image/png') {
         this.selectedFile = true;
-        console.log('true');
       }
       else {
         this.selectedFile = false;
-        console.log('false');
       }
     }
   }
@@ -70,7 +68,6 @@ export class TestHeaderComponent implements OnInit {
   _onSave(){
     const postData = new FormData();
     const post = new Post();
-    console.log('header ' + this.user);
     const user = this.user;
 
     post.txt = this.form.controls.description.value;

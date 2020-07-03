@@ -135,3 +135,14 @@ input{
   /*-webkit-text-stroke-color: dodgerblue;*/
   text-align: center;
 }
+
+#case-no-posts{
+  position: absolute;
+  margin-top: -13%;
+  width: 100%;
+  text-align: center;
+}
+
+#case-no-posts h2{
+  font-size: 40px;
+}

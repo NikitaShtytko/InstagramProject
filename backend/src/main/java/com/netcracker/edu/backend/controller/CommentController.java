@@ -40,7 +40,6 @@ public class CommentController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Comment saveComment(@RequestBody Comment comment) {
-        log.info("POST");
         return commentService.save(comment);
     }
 

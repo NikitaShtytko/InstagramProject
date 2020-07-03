@@ -37,7 +37,9 @@
 
       <div class="buttons">
         <button mdbBtn color="primary" id="user-posts" (click)="_UserPosts()">View posts</button>
-        <button *ngIf="userRole == 'ROLE_ADMIN'" mdbBtn color="red" id="delete-button" (click)="deleteProfile.show();">Delete User</button>
+        <button *ngIf="userRole == 'ROLE_ADMIN'" mdbBtn color="red" id="delete-button" (click)="deleteProfile.show();">
+          Delete User
+        </button>
       </div>
       <div class="delete-button">
 
@@ -58,7 +60,7 @@
       </thead>
       <tbody class="thead-dark-child">
       <tr *ngFor="let s of posts; let r = index;">
-        <td><a routerLink="post/{{s.id}}">
+        <td><a (click)="_navigate(s.id)">
           <img width="534" height="300" src="{{s?.photo}}" alt="No photo">
         </a>
         </td>
@@ -69,6 +71,9 @@
       </tr>
       </tbody>
     </table>
+  </div>
+  <div *ngIf="noPosts" id="case-no-posts">
+    <h2>This user has no posts.</h2>
   </div>
 </div>
 
@@ -99,7 +104,21 @@
   </div>
 </div>
 
+<div *ngIf="noPosts" mdbModal #noPosts="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
 
+  <div class="modal-dialog modal-md" role="document" style="text-align: center">
+    <div class="modal-content">
+      <div style="margin: 5% 10%; font-size: 20px">
+        This user has no posts
+      </div>
+      <div class="modal-footer" style="display: flex">
+        <button type="button" mdbBtn color="secondary" class="waves-light"
+                (click)="noPosts.hide();" mdbWavesEffect>Cancel
+        </button>
+      </div>
 
-
-
+    </div>
+  </div>
+</div>

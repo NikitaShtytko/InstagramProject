@@ -35,11 +35,12 @@ export class TestHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserByLogin(this.tokenService?.userDetails?.username);
+    // this.getUserByLogin(this.tokenService?.userDetails?.username);
   }
 
   get userExist() {
-    return this.tokenService?.userDetails;
+    // return this.tokenService?.userDetails;
+    return true;
   }
 
   logOut() {
